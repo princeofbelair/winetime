@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PRDKE.iml" filepath="$PROJECT_DIR$/PRDKE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wineweb.iml" filepath="$PROJECT_DIR$/wineweb.iml" />
     </modules>
   </component>
 </project>
