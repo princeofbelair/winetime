@@ -1,7 +1,25 @@
 package controller;
 
+import data.Wine;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
+import java.util.List;
+
 /**
- * Created by Romana on 13.01.2017.
+ * ManagedBean for Index View
  */
-public class WineController {
+
+@ManagedBean(name = "data")
+@ViewScoped
+public class WineController implements Serializable {
+
+    private Wine wine = new Wine();
+
+    public List<Wine> getAllWines() {
+        return wine.selectAll();
+    }
+
+
 }

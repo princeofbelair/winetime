@@ -7,7 +7,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="wineweb" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Mojarra-2.2.1" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.40-bin" />
+        </element>
       </element>
+      <element id="dir-copy" path="$PROJECT_DIR$/web" />
     </root>
   </artifact>
 </component>
