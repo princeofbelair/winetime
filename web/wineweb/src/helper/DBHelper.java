@@ -1,6 +1,8 @@
 package helper;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import javax.sql.DataSource;
@@ -10,15 +12,14 @@ import javax.sql.DataSource;
  */
 public class DBHelper {
 
-    private static String MYSQL_URL = "jdbc:mysql://localhost:3306/winetime";
+    private static String MYSQL_URL = "jdbc:mysql://127.0.0.1:3306/Winetime";
     private static String MYSQL_USER = "root";
     private static String MYSQL_PW = "root";
 
-    public DBHelper() {}
+    public static Connection mySQLConnection;
 
-    public Connection createMySQLConnection() {
+    static {
 
-        Connection mysqlConnection = null;
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL(MYSQL_URL);
         dataSource.setUser(MYSQL_USER);
@@ -26,12 +27,16 @@ public class DBHelper {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mysqlConnection = dataSource.getConnection();
+            DBHelper.mySQLConnection = dataSource.getConnection();
+            //mysqlConnection = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PW);
+            System.out.println("Connected to MYSQL DB");
         } catch(Exception ex) {
             System.out.println("Could not establish mysql connection. Maybe the MySQL server is offline.");
+            System.out.println(ex.getMessage());
         }
 
-        return mysqlConnection;
     }
+
+
 
 }
