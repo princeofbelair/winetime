@@ -6,13 +6,67 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-   <f:view>
-      <h:outputLabel value="Hello, world"/>
-   </f:view>
+<h:head>
 
-   <p:dataTable var="wine" value="#{data.wines}">
-      <p:column headerText="Weinname">
-         <h:outputText value="#{wine.label}"></h:outputText>
-      </p:column>
-   </p:dataTable>
+</h:head>
+<h:body>
+    <div>&nbsp;</div>
+    <h2 style="text-align: center; color: #b30000;font-family: Verdana">SEMANTISCHE SUCHE NACH WEINEN</h2>
+    <div>&nbsp;</div>
+    
+    <div align="center">
+        <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
+        <p:inputText placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
+        <p:commandButton value="Suchen" type="button" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
+    </div>
+    <div>&nbsp;</div>
+    <h:form id="myform" style="margin-left: 5%; margin-right: 5%">
+        <p:dataTable var="wine"
+                     widgetVar="wineTable"
+                     value="#{data.wines}"
+                     rows="10"
+                     paginator="true"
+                     paginatorTemplate=" {CurrentPageReport}
+                                         {FirstPageLink}
+                                         {PreviousPageLink}
+                                         {PageLinks}
+                                         {NextPageLink}
+                                         {LastPageLink}
+                                         {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,25,50"
+                     emptyMessage="Es wurden keine passenden Einträge gefunden!">
+            <f:facet name="header">
+                <p:outputPanel stlye="float:right">
+                    <div align="right">
+                        <h:outputText value="Aktuelle Weinliste durchsuchen:  "/>
+                        <p:inputText id="globalFilter" onkeyup="PF('wineTable').filter()" style="width:300px" />
+                    </div>
+                </p:outputPanel>
+            </f:facet>
+            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Weinname">
+                <h:outputText value="#{wine.label}"></h:outputText>
+            </p:column>
+            <p:column  filterBy="#{wine.wineGrape}" filterStyle="display:none" headerText="Traube">
+                <h:outputText value="#{wine.wineGrape}"></h:outputText>
+            </p:column>
+            <p:column  filterBy="#{wine.wineCategory}" filterStyle="display:none" headerText="Sorte">
+                <h:outputText value="#{wine.wineCategory}"></h:outputText>
+            </p:column>
+            <p:column  filterBy="#{wine.wineGrower}" filterStyle="display:none" headerText="Winzer">
+                <h:outputText value="#{wine.wineGrower}"></h:outputText>
+            </p:column>
+            <p:column  filterBy="#{wine.wineRegion}" filterStyle="display:none" headerText="Region">
+                <h:outputText value="#{wine.wineRegion}"></h:outputText>
+            </p:column>
+            <p:column  filterBy="#{wine.locality}" filterStyle="display:none" headerText="Ort">
+                <h:outputText value="#{wine.locality}"></h:outputText>
+            </p:column>
+            <f:facet name="footer">
+                Es wurden x Einträge gefunden.
+            </f:facet>
+        </p:dataTable>
+    </h:form>
+</h:body>
+
+
 </html>

@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 public class DBHelper {
 
     private static String MYSQL_URL = "jdbc:mysql://127.0.0.1:3306/Winetime";
+    private static String NADINE_MYSQL_URL = "jdbc:mysql://127.0.0.1:3306/winetime";
     private static String MYSQL_USER = "root";
     private static String MYSQL_PW = "root";
 
@@ -21,7 +22,7 @@ public class DBHelper {
     static {
 
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL(MYSQL_URL);
+        dataSource.setURL(NADINE_MYSQL_URL);
         dataSource.setUser(MYSQL_USER);
         dataSource.setPassword(MYSQL_PW);
 
