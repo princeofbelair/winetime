@@ -22,5 +22,14 @@ public class WineController implements Serializable {
         return wine.selectAll();
     }
 
+    private Wine selectedWine;
+
+    public Wine getSelectedWine() {
+        return selectedWine;
+    }
+
+    public void setSelectedWine(Wine selectedWine) {
+        this.selectedWine = selectedWine;
+    }
 
 }

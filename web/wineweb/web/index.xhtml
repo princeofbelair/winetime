@@ -22,9 +22,10 @@
     <div>&nbsp;</div>
     <h:form id="myform" style="margin-left: 5%; margin-right: 5%">
         <p:dataTable var="wine"
+                     id="singleDT"
                      widgetVar="wineTable"
                      value="#{data.wines}"
-                     rows="10"
+                     rows="5"
                      paginator="true"
                      paginatorTemplate=" {CurrentPageReport}
                                          {FirstPageLink}
@@ -33,17 +34,20 @@
                                          {NextPageLink}
                                          {LastPageLink}
                                          {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="10,25,50"
-                     emptyMessage="Es wurden keine passenden Einträge gefunden!">
+                     rowsPerPageTemplate="5,10,15,30"
+                     emptyMessage="Es wurden keine passenden Einträge gefunden!"
+                     selectionMode="single"
+                     selection="#{data.selectedWine}"
+                     rowKey="#{wine.id}">
             <f:facet name="header">
-                <p:outputPanel stlye="float:right">
+                <p:outputPanel>
                     <div align="right">
                         <h:outputText value="Aktuelle Weinliste durchsuchen:  "/>
                         <p:inputText id="globalFilter" onkeyup="PF('wineTable').filter()" style="width:300px" />
                     </div>
                 </p:outputPanel>
             </f:facet>
-            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Weinname">
+            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Bezeichnung">
                 <h:outputText value="#{wine.label}"></h:outputText>
             </p:column>
             <p:column  filterBy="#{wine.wineGrape}" filterStyle="display:none" headerText="Traube">
@@ -62,9 +66,46 @@
                 <h:outputText value="#{wine.locality}"></h:outputText>
             </p:column>
             <f:facet name="footer">
-                Es wurden x Einträge gefunden.
+                <p:commandButton process="singleDT"
+                                 update=":myform:wineDetail"
+                                 icon="ui-icon-search"
+                                 value="Details anzeigen"
+                                 oncomplete="PF('wineDialog').show()" />
             </f:facet>
         </p:dataTable>
+
+        <p:dialog header="Details"
+                  widgetVar="wineDialog"
+                  modal="true"
+                  showEffect="fade"
+                  hideEffect="fade"
+                  resizable="false"
+                  style="width:400px; height:400px; text-align: center">
+            <p:outputPanel id="wineDetail" style="text-align:center;">
+                <p:graphicImage name="/images/wines.jpg" style="width: 300px"/>
+                <p:panelGrid  columns="2"  columnClasses="label,value" style="border: none" align="center">
+
+                    <h:outputText value="Bezeichnung:" />
+                    <h:outputText value="#{data.selectedWine.label}" />
+
+                    <h:outputText value="Traube:" />
+                    <h:outputText value="#{data.selectedWine.wineGrape}" />
+
+                    <h:outputText value="Sorte:" />
+                    <h:outputText value="#{data.selectedWine.wineCategory}" />
+
+                    <h:outputText value="Winzer:" />
+                    <h:outputText value="#{data.selectedWine.wineGrower}" />
+
+                    <h:outputText value="Region:" />
+                    <h:outputText value="#{data.selectedWine.wineRegion}" />
+
+                    <h:outputText value="Ort:" />
+                    <h:outputText value="#{data.selectedWine.locality}" />
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
     </h:form>
 </h:body>
 
