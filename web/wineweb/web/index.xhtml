@@ -13,100 +13,118 @@
     <div>&nbsp;</div>
     <h2 style="text-align: center; color: #b30000;font-family: Verdana">SEMANTISCHE SUCHE NACH WEINEN</h2>
     <div>&nbsp;</div>
-    
+
     <div align="center">
         <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
         <p:inputText placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
         <p:commandButton value="Suchen" type="button" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
     </div>
     <div>&nbsp;</div>
-    <h:form id="myform" style="margin-left: 5%; margin-right: 5%">
-        <p:dataTable var="wine"
-                     id="singleDT"
-                     widgetVar="wineTable"
-                     value="#{data.wines}"
-                     rows="5"
-                     paginator="true"
-                     paginatorTemplate=" {CurrentPageReport}
+
+    <p:outputPanel>
+        <div class="ui-grid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-9">
+
+                    <h:form id="myform" style="margin-left: 1%">
+                        <p:dataTable var="wine"
+                                     id="singleDT"
+                                     widgetVar="wineTable"
+                                     value="#{data.wines}"
+                                     rows="5"
+                                     paginator="true"
+                                     paginatorTemplate=" {CurrentPageReport}
                                          {FirstPageLink}
                                          {PreviousPageLink}
                                          {PageLinks}
                                          {NextPageLink}
                                          {LastPageLink}
                                          {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="5,10,15,30"
-                     emptyMessage="Es wurden keine passenden Einträge gefunden!"
-                     selectionMode="single"
-                     selection="#{data.selectedWine}"
-                     rowKey="#{wine.id}">
-            <f:facet name="header">
-                <p:outputPanel>
-                    <div align="right">
-                        <h:outputText value="Aktuelle Weinliste durchsuchen:  "/>
-                        <p:inputText id="globalFilter" onkeyup="PF('wineTable').filter()" style="width:300px" />
-                    </div>
-                </p:outputPanel>
-            </f:facet>
-            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Bezeichnung">
-                <h:outputText value="#{wine.label}"></h:outputText>
-            </p:column>
-            <p:column  filterBy="#{wine.wineGrape}" filterStyle="display:none" headerText="Traube">
-                <h:outputText value="#{wine.wineGrape}"></h:outputText>
-            </p:column>
-            <p:column  filterBy="#{wine.wineCategory}" filterStyle="display:none" headerText="Sorte">
-                <h:outputText value="#{wine.wineCategory}"></h:outputText>
-            </p:column>
-            <p:column  filterBy="#{wine.wineGrower}" filterStyle="display:none" headerText="Winzer">
-                <h:outputText value="#{wine.wineGrower}"></h:outputText>
-            </p:column>
-            <p:column  filterBy="#{wine.wineRegion}" filterStyle="display:none" headerText="Region">
-                <h:outputText value="#{wine.wineRegion}"></h:outputText>
-            </p:column>
-            <p:column  filterBy="#{wine.locality}" filterStyle="display:none" headerText="Ort">
-                <h:outputText value="#{wine.locality}"></h:outputText>
-            </p:column>
-            <f:facet name="footer">
-                <p:commandButton process="singleDT"
-                                 update=":myform:wineDetail"
-                                 icon="ui-icon-search"
-                                 value="Details anzeigen"
-                                 oncomplete="PF('wineDialog').show()" />
-            </f:facet>
-        </p:dataTable>
+                                     rowsPerPageTemplate="5,10,15,30"
+                                     emptyMessage="Es wurden keine passenden Einträge gefunden!"
+                                     selectionMode="single"
+                                     selection="#{data.selectedWine}"
+                                     rowKey="#{wine.id}">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <div align="right">
+                                        <h:outputText value="Aktuelle Weinliste durchsuchen:  "/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('wineTable').filter()" style="width:300px" />
+                                    </div>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Bezeichnung" style="text-align: center">
+                                <h:outputText value="#{wine.label}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineGrape}" filterStyle="display:none" headerText="Traube" style="text-align:center">
+                                <h:outputText value="#{wine.wineGrape}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineCategory}" filterStyle="display:none" headerText="Sorte" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineCategory}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineGrower}" filterStyle="display:none" headerText="Winzer" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineGrower}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineRegion}" filterStyle="display:none" headerText="Region" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineRegion}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.locality}" filterStyle="display:none" headerText="Ort" style="width: auto; text-align:center">
+                                <h:outputText value="#{wine.locality}"></h:outputText>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton process="singleDT"
+                                                 update=":myform:wineDetail"
+                                                 icon="ui-icon-search"
+                                                 value="Details anzeigen"
+                                                 oncomplete="PF('wineDialog').show()" />
+                            </f:facet>
+                        </p:dataTable>
 
-        <p:dialog header="Details"
-                  widgetVar="wineDialog"
-                  modal="true"
-                  showEffect="fade"
-                  hideEffect="fade"
-                  resizable="false"
-                  style="width:400px; height:400px; text-align: center">
-            <p:outputPanel id="wineDetail" style="text-align:center;">
-                <p:graphicImage name="/images/wines.jpg" style="width: 300px"/>
-                <p:panelGrid  columns="2"  columnClasses="label,value" style="border: none" align="center">
+                        <p:dialog header="Details"
+                                  widgetVar="wineDialog"
+                                  modal="true"
+                                  showEffect="fade"
+                                  hideEffect="fade"
+                                  resizable="false"
+                                  style="width:400px; height:400px; text-align: center">
+                            <p:outputPanel id="wineDetail" style="text-align:center;">
+                                <p:graphicImage name="/images/wines.jpg" style="width: 300px"/>
+                                <p:panelGrid  columns="2"  columnClasses="label,value" style="border: none" align="center">
 
-                    <h:outputText value="Bezeichnung:" />
-                    <h:outputText value="#{data.selectedWine.label}" />
+                                    <h:outputText value="Bezeichnung:" />
+                                    <h:outputText value="#{data.selectedWine.label}" />
 
-                    <h:outputText value="Traube:" />
-                    <h:outputText value="#{data.selectedWine.wineGrape}" />
+                                    <h:outputText value="Traube:" />
+                                    <h:outputText value="#{data.selectedWine.wineGrape}" />
 
-                    <h:outputText value="Sorte:" />
-                    <h:outputText value="#{data.selectedWine.wineCategory}" />
+                                    <h:outputText value="Sorte:" />
+                                    <h:outputText value="#{data.selectedWine.wineCategory}" />
 
-                    <h:outputText value="Winzer:" />
-                    <h:outputText value="#{data.selectedWine.wineGrower}" />
+                                    <h:outputText value="Winzer:" />
+                                    <h:outputText value="#{data.selectedWine.wineGrower}" />
 
-                    <h:outputText value="Region:" />
-                    <h:outputText value="#{data.selectedWine.wineRegion}" />
+                                    <h:outputText value="Region:" />
+                                    <h:outputText value="#{data.selectedWine.wineRegion}" />
 
-                    <h:outputText value="Ort:" />
-                    <h:outputText value="#{data.selectedWine.locality}" />
+                                    <h:outputText value="Ort:" />
+                                    <h:outputText value="#{data.selectedWine.locality}" />
 
-                </p:panelGrid>
-            </p:outputPanel>
-        </p:dialog>
-    </h:form>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </h:form>
+                </div>
+                <div class="ui-grid-col-3">
+                    <p:fieldset legend="Suchvorschläge" style="height:420px; margin-right: 2%">
+                        daldfjaod
+                    </p:fieldset>
+                </div>
+            </div>
+        </div>
+    </p:outputPanel>
+
+
+
 </h:body>
 
 
