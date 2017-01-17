@@ -1,12 +1,15 @@
 package helper;
 
 
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.riot.web.HttpOp;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.AbstractList;
 
 import java.util.ArrayList;
@@ -48,7 +51,7 @@ public class SparqlHelper {
                 "\nWHERE { \n" +
                 "?class rdfs:subClassOf wine:" + queriedClass +
                 "}";
-        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/winetime", query);
+        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/wineTime", query);
         ResultSet results = q.execSelect();
         return results;
     }
@@ -66,7 +69,7 @@ public class SparqlHelper {
                 "wine:" + queriedClass + " rdfs:subClassOf ?class." +
                 "\n}";
 
-        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/winetime", query);
+        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/wineTime", query);
         ResultSet results = q.execSelect();
         return results;
     }
@@ -84,17 +87,18 @@ public class SparqlHelper {
                 "?class (owl:equivalentClass|^owl:equivalentClass) wine:" + queriedClass + "." +
                 "\n}";
 
-        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/winetime", query);
+        QueryExecution q = QueryExecutionFactory.sparqlService("http://localhost:3030/wineTime", query);
         ResultSet results = q.execSelect();
         return results;
     }
 
     public static void main(String[] argv) throws IOException {
-        uploadRDF(new File("C:/Users/Romana/Google Drive/PR DKE/WineTime.owl"), "http://localhost:3030/winetime");
+        //uploadRDF(new File("C:/Users/Romana/Desktop/WineTime.rdf"), "http://localhost:3030/");
+
 
         List<String> resultList = new ArrayList<String>();
 
-        ResultSet results = querySuperClass("MittelburgenlandDAC");
+        ResultSet results = querySuperClass("Gewürztraminer");
         if(!results.hasNext()) System.out.println("Ergebnisliste ist leer");
         System.out.println("Ergebnisliste:\n");
         while (results.hasNext()) {

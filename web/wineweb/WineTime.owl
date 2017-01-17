@@ -1,0 +1,659 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://jku.at/winetime#"
+     xml:base="http://jku.at/winetime"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://jku.at/winetime"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://jku.at/winetime#hasOrigin -->
+
+    <owl:ObjectProperty rdf:about="http://jku.at/winetime#hasOrigin">
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wein"/>
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wine"/>
+        <rdfs:range rdf:resource="http://jku.at/winetime#Region"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://jku.at/winetime#hasProducer -->
+
+    <owl:ObjectProperty rdf:about="http://jku.at/winetime#hasProducer">
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wein"/>
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wine"/>
+        <rdfs:range rdf:resource="http://jku.at/winetime#Winery"/>
+        <rdfs:range rdf:resource="http://jku.at/winetime#Winzer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://jku.at/winetime#producedFrom -->
+
+    <owl:ObjectProperty rdf:about="http://jku.at/winetime#producedFrom">
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wein"/>
+        <rdfs:domain rdf:resource="http://jku.at/winetime#Wine"/>
+        <rdfs:range rdf:resource="http://jku.at/winetime#Weinsorte"/>
+        <rdfs:range rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://jku.at/winetime#BlauerZweigelt -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#BlauerZweigelt">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Zweigelt"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Blaufränkisch -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Blaufränkisch">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Burgenland -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Burgenland">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#CabernetSauvignon -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#CabernetSauvignon">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Carnuntum -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Carnuntum">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Chardonnay -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Chardonnay">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Morillon"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Cuvee -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Cuvee">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#DessertWine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#DessertWine">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Dessertwein"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Dessertwein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Dessertwein">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wein"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#EisenbergDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#EisenbergDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Burgenland"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#GelberMuskateller -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#GelberMuskateller">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Muskateller"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#GelberTraminer -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#GelberTraminer">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Traminer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#GemischterSatz -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#GemischterSatz">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Gewürztraminer -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Gewürztraminer">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Traminer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Grauburgunder -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Grauburgunder">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#PinotGris"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#GruenerVeltliner -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#GruenerVeltliner">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#KamptalDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#KamptalDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#KremstalDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#KremstalDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#LeithabergDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#LeithabergDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Burgenland"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Merlot -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Merlot">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#MittelburgenlandDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#MittelburgenlandDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Burgenland"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Morillon -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Morillon">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Muskateller -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Muskateller">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Neuburger -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Neuburger">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#NeusiedlerseeDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#NeusiedlerseeDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Burgenland"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Niederoesterreich -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Niederoesterreich">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#PinotBlanc -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#PinotBlanc">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Weißburgunder"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#PinotGris -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#PinotGris">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#PinotNoir -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#PinotNoir">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Spätburgunder"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#RedWine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#RedWine">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Rotwein"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Region -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Region"/>
+    
+
+
+    <!-- http://jku.at/winetime#Riesling -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Riesling">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#RoseWine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#RoseWine">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Rosewein"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Rosewein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Rosewein">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wein"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#RoterTraminer -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#RoterTraminer">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Traminer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Rotgipfler -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Rotgipfler">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Rotwein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Rotwein">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wein"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#SauvignonBlanc -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#SauvignonBlanc">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Schaumwein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Schaumwein">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#SparklingWine"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wein"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Shiraz -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Shiraz">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Syrah"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#SparklingWine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#SparklingWine">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Spätburgunder -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Spätburgunder">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#St.Laurent -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#St.Laurent">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Steiermark -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Steiermark">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Syrah -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Syrah">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Südsteiermark -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Südsteiermark">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Steiermark"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Thermenregion -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Thermenregion">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#TraisentalDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#TraisentalDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Traminer -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Traminer">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Vulkanland -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Vulkanland">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Steiermark"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Wachau -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Wachau">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Wagram -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Wagram">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Wein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Wein">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Weinsorte -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Weinsorte">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#WeinviertelDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#WeinviertelDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Niederoesterreich"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Weißburgunder -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Weißburgunder">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Weißwein -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Weißwein">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#WhiteWine"/>
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wein"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Welschriesling -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Welschriesling">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Weststeiermark -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Weststeiermark">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Steiermark"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#WhiteWine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#WhiteWine">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Wien -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Wien">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#WienerGemischterSatzDAC -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#WienerGemischterSatzDAC">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#Wien"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Wine -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Wine"/>
+    
+
+
+    <!-- http://jku.at/winetime#WineGrape -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#WineGrape"/>
+    
+
+
+    <!-- http://jku.at/winetime#Winery -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Winery">
+        <owl:equivalentClass rdf:resource="http://jku.at/winetime#Winzer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Winzer -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Winzer"/>
+    
+
+
+    <!-- http://jku.at/winetime#Zierfandler -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Zierfandler">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://jku.at/winetime#Zweigelt -->
+
+    <owl:Class rdf:about="http://jku.at/winetime#Zweigelt">
+        <rdfs:subClassOf rdf:resource="http://jku.at/winetime#WineGrape"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://jku.at/winetime#Burgenland"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Niederoesterreich"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Steiermark"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Wien"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://jku.at/winetime#Chardonnay"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#GelberMuskateller"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#GruenerVeltliner"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Riesling"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Traminer"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Weißburgunder"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#Welschriesling"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://jku.at/winetime#DessertWine"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#RedWine"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#RoseWine"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#SparklingWine"/>
+            <rdf:Description rdf:about="http://jku.at/winetime#WhiteWine"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
+
