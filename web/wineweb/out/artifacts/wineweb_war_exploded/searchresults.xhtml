@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+<h:body>
+    <div>&nbsp;</div>
+    <h2 style="text-align: center; color: #b30000;font-family: Verdana">SEMANTISCHE SUCHE NACH WEINEN</h2>
+    <div>&nbsp;</div>
+
+    <div align="center">
+        <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
+        <p:inputText placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
+        <p:commandButton value="Suchen" type="button" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
+    </div>
+    <div>&nbsp;</div>
+
+    <p:outputPanel>
+        <div class="ui-grid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-11">
+
+                    <h:form id="myform" style="margin-left: 10%">
+                        <p:dataTable var="wine"
+                                     id="singleDT"
+                                     widgetVar="wineTable"
+                                     value="#{data.wines}"
+                                     rows="5"
+                                     paginator="true"
+                                     paginatorTemplate=" {CurrentPageReport}
+                                         {FirstPageLink}
+                                         {PreviousPageLink}
+                                         {PageLinks}
+                                         {NextPageLink}
+                                         {LastPageLink}
+                                         {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15,30"
+                                     emptyMessage="Es wurden keine passenden Einträge gefunden!"
+                                     selectionMode="single"
+                                     selection="#{data.selectedWine}"
+                                     rowKey="#{wine.id}">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <div align="right">
+                                        <h:outputText value="Aktuelle Weinliste durchsuchen:  "/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('wineTable').filter()" style="width:300px" />
+                                    </div>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column filterBy="#{wine.label}" filterStyle="display:none" headerText="Bezeichnung" style="text-align: center">
+                                <h:outputText value="#{wine.label}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineGrape}" filterStyle="display:none" headerText="Traube" style="text-align:center">
+                                <h:outputText value="#{wine.wineGrape}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineCategory}" filterStyle="display:none" headerText="Sorte" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineCategory}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineGrower}" filterStyle="display:none" headerText="Winzer" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineGrower}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.wineRegion}" filterStyle="display:none" headerText="Region" style="width:auto; text-align: center">
+                                <h:outputText value="#{wine.wineRegion}"></h:outputText>
+                            </p:column>
+                            <p:column  filterBy="#{wine.locality}" filterStyle="display:none" headerText="Ort" style="width: auto; text-align:center">
+                                <h:outputText value="#{wine.locality}"></h:outputText>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton process="singleDT"
+                                                 update=":myform:wineDetail"
+                                                 icon="ui-icon-search"
+                                                 value="Details anzeigen"
+                                                 oncomplete="PF('wineDialog').show()" />
+                            </f:facet>
+                        </p:dataTable>
+
+                        <p:dialog header="Details"
+                                  widgetVar="wineDialog"
+                                  modal="true"
+                                  showEffect="fade"
+                                  hideEffect="fade"
+                                  resizable="false"
+                                  style="width:400px; height:400px; text-align: center">
+                            <p:outputPanel id="wineDetail" style="text-align:center;">
+                                <p:graphicImage name="/images/wines.jpg" style="width: 300px"/>
+                                <h:panelGrid columns="3" columnClasses="label,value,value" style="text-align: left">
+
+                                    <h:outputText value="Bezeichnung:   " style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.label}" />
+                                    <h:outputText value=""/>
+
+                                    <h:outputText value="Traube:" style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.wineGrape}" />
+                                    <p:link style="font-size: smaller" value="Andere Weine dieser Traube?"/>
+
+                                    <h:outputText value="Sorte:" style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.wineCategory}" />
+                                    <p:link style="font-size: smaller" value="Andere Weine dieser Kategorie?"/>
+
+                                    <h:outputText value="Winzer:" style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.wineGrower}" />
+                                    <p:link style="font-size: smaller" value="Andere Weine von diesem Winzer?"/>
+
+                                    <h:outputText value="Region:" style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.wineRegion}" />
+                                    <p:link style="font-size: smaller" value="Andere Weine aus dieser Region?"/>
+
+                                    <h:outputText value="Ort:" style="font-weight: bold; color:#b30000"/>
+                                    <h:outputText value="#{data.selectedWine.locality}" />
+                                    <p:link style="font-size: smaller" value="Andere Weine aus diesem Ort?"/>
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </h:form>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-11">
+                    <p:fieldset legend="Suchvorschläge" style="height:100px; margin-left: 10%">
+                        daldfjaod
+                    </p:fieldset>
+                </div>
+            </div>
+        </div>
+    </p:outputPanel>
+
+
+
+</h:body>
+
+
+</html>
