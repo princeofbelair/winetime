@@ -11,7 +11,6 @@
           <element id="library" level="project" name="Mojarra-2.2.1" />
           <element id="library" level="project" name="PrimeFaces-5.2" />
           <element id="library" level="project" name="mysql-connector-java-5.1.40-bin" />
-          <element id="library" level="project" name="collection-0.6" />
         </element>
       </element>
       <element id="dir-copy" path="$PROJECT_DIR$/web" />

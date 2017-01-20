@@ -5,6 +5,7 @@ import data.Wine;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,9 +17,9 @@ import java.util.List;
 @ViewScoped
 public class WineController implements Serializable {
 
-    private Wine wine = new Wine();
+    private static Wine wine = new Wine();
 
-    public List<Wine> getWines() {
+    public static List<Wine> getWines() {
         return wine.selectAll();
     }
 
@@ -32,4 +33,15 @@ public class WineController implements Serializable {
         this.selectedWine = selectedWine;
     }
 
+
+    public static void main(String[] argv) throws IOException {
+        List<Wine> resultList = getWines();
+        Wine wine = new Wine();
+        List<Wine> sW = wine.searchForSubstring("Loimer");
+        List<Wine> list = wine.searchForString("Loimer");
+        List<Wine> wineFrom = wine.searchWinesFromRegion("Wachau");
+        List<String> stringList = wine.queryEquivalentClass("Chardonnay");
+        System.out.println(resultList.get(0).getLabel());
+        System.out.println(sW.get(0).getLabel());
+    }
 }
