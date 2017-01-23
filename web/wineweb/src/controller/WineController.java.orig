@@ -264,7 +264,20 @@ public class WineController implements Serializable {
         return result;
     }
 
+<<<<<<< HEAD
+    public static void main(String[] argv) throws IOException {
+        //List<Wine> resultList = getWines();
+        Wine wine = new Wine();
+        List<Wine> sW = wine.searchForSubstring("Riesling", "Kamptal", "", "", "", "");
+        List<Wine> list = wine.searchForString("Loimer");
+        List<Wine> wineFrom = wine.searchWinesFromRegion("Wachau");
+        List<String> stringList = wine.queryEquivalentClass("Chardonnay");
+        List<String> regions = new ArrayList<>();
+
+        //Map<String, List<String>> test = semanticSearch("sdgdf");
+=======
     private int getRandomNumber(int maximum, int minimum) {
+>>>>>>> 9b67482a87cb11f312f51f86e22447bb6c155013
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
     }
