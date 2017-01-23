@@ -171,7 +171,8 @@ public class Wine {
                         "Weinkategorie like lower(\"%" + word + "%\") or " +
                         "Winzer like lower(\"%" + word + "%\") or " +
                         "Region like lower(\"%" + word + "%\") or " +
-                        "Ort like lower(\"%" + word + "%\")";
+                        "Ort like lower(\"%" + word + "%\")" +
+                        "AND Region ";
 
         return executeQuery(query);
     }

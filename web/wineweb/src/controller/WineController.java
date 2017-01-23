@@ -2,6 +2,9 @@ package controller;
 
 import data.Wine;
 import org.apache.jena.base.Sys;
+import org.primefaces.model.tagcloud.DefaultTagCloudItem;
+import org.primefaces.model.tagcloud.DefaultTagCloudModel;
+import org.primefaces.model.tagcloud.TagCloudModel;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -10,10 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,6 +27,16 @@ public class WineController implements Serializable {
 
     private static Wine wine = new Wine();
     private String searchString;
+    private Map<String, List<String>> results;
+    private Random rnd = new Random();
+
+    private void setResults(Map<String, List<String>> results) {
+        this.results = results;
+    }
+
+    private Map<String, List<String>> getResults() {
+        return this.results;
+    }
 
     public void setSearchString(String searchString) {
         this.searchString = searchString;
@@ -41,6 +51,99 @@ public class WineController implements Serializable {
 
     }
 
+    public TagCloudModel getRegions() {
+        if(this.results != null) {
+            List<String> regions = this.results.get("regions");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : regions) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+    }
+
+    public TagCloudModel getSubClass() {
+        if(this.results != null) {
+            List<String> subclass = this.results.get("subclass");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : subclass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+
+    }
+
+    public TagCloudModel getSuperClass() {
+        if(this.results != null) {
+            List<String> superclass = this.results.get("superclass");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : superclass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+    }
+
+    public  TagCloudModel getSynonyms() {
+        if(this.results != null) {
+            List<String> synonyms = this.results.get("synonyms");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : synonyms) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+
+    }
+
+    public TagCloudModel getLocality() {
+        if(this.results != null) {
+            List<String> locality = this.results.get("locality");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : locality) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+
+    }
+
+    public TagCloudModel getGrowers() {
+        if(this.results != null) {
+            List<String> growers = this.results.get("growers");
+            TagCloudModel model = new DefaultTagCloudModel();
+
+            for (String r : growers) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+
+    }
+
     private Wine selectedWine;
 
     public Wine getSelectedWine() {
@@ -51,6 +154,11 @@ public class WineController implements Serializable {
         this.selectedWine = selectedWine;
     }
 
+    public String submitSearch() {
+        setResults(this.semanticSearch(this.searchString));
+        return "searchresults";
+    }
+
     /**
      * Helper-methode
      * return list of regions which occur in searchResult for semantic search suggestion
@@ -58,7 +166,7 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private static List<String> getRegionsFromSearchResult(List<Wine> resultList) {
+    private List<String> getRegionsFromSearchResult(List<Wine> resultList) {
         List<String> regions = new ArrayList<>();
         for (Wine w : resultList) {
             regions.add(w.getWineRegion());
@@ -74,7 +182,7 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private static List<String> getGrowerFromSearchResult(List<Wine> resultList) {
+    private List<String> getGrowerFromSearchResult(List<Wine> resultList) {
         List<String> growers = new ArrayList<>();
         for (Wine w : resultList) {
             growers.add(w.getWineGrower());
@@ -90,7 +198,7 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private static List<String> getLocalityFromSearchResult(List<Wine> resultList) {
+    private List<String> getLocalityFromSearchResult(List<Wine> resultList) {
         List<String> localities = new ArrayList<>();
         for (Wine w : resultList) {
             localities.add(w.getLocality());
@@ -100,41 +208,31 @@ public class WineController implements Serializable {
     }
 
 
-    private static Map<String, List<String>> semanticSearch(String word) {
+    private Map<String, List<String>> semanticSearch(String word) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
 
         //sparql
         List<String> subClass = wine.querySubClass(word);
-        //if (!subClass.isEmpty()) result.put("subClass", subClass);
+        if (!subClass.isEmpty()) result.put("subClass", subClass);
         List<String> superClass = wine.querySuperClass(word);
-        //if (!subClass.isEmpty()) result.put("superClass", superClass);
+        if (!subClass.isEmpty()) result.put("superClass", superClass);
         List<String> synonyms = wine.queryEquivalentClass(word);
-        //if (!synonyms.isEmpty()) result.put("synonyms", synonyms);
+        if (!synonyms.isEmpty()) result.put("synonyms", synonyms);
 
         //db
         List<Wine> dbResults = wine.searchForSubstring(word);
         List<String> locality = getLocalityFromSearchResult(dbResults);
-        //if (!locality.isEmpty()) result.put("locality", locality);
+        if (!locality.isEmpty()) result.put("locality", locality);
         List<String> growers = getGrowerFromSearchResult(dbResults);
-        //if (!growers.isEmpty()) result.put("growers", growers);
+        if (!growers.isEmpty()) result.put("growers", growers);
         List<String> regions = getRegionsFromSearchResult(dbResults);
-        //if (!regions.isEmpty()) result.put("regions", regions);
+        if (!regions.isEmpty()) result.put("regions", regions);
 
         return result;
     }
 
-    public static void main(String[] argv) throws IOException {
-        //List<Wine> resultList = getWines();
-        Wine wine = new Wine();
-        List<Wine> sW = wine.searchForSubstring("Loimer");
-        List<Wine> list = wine.searchForString("Loimer");
-        List<Wine> wineFrom = wine.searchWinesFromRegion("Wachau");
-        List<String> stringList = wine.queryEquivalentClass("Chardonnay");
-        List<String> regions = new ArrayList<>();
+    private int getRandomNumber(int maximum, int minimum) {
 
-        Map<String, List<String>> test = semanticSearch("sdgdf");
-
-        System.out.println(resultList.get(0).getLabel());
-        System.out.println(sW.get(0).getLabel());
+        return rnd.nextInt(maximum - minimum + 1) + minimum;
     }
 }

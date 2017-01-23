@@ -124,10 +124,12 @@
                 </div>
             </div>
             <div>&nbsp;</div>
+            <!--TODO Nadine bitte pro Vorschlag, also Region, Winzer, usw. ein Fieldset plus TagCloud -->
             <div class="ui-grid-row">
                 <div class="ui-grid-col-11">
-                    <p:fieldset legend="Suchvorschläge" style="height:100px; margin-left: 10%">
-                        daldfjaod
+                    <p:fieldset legend="Suchvorschläge" style="margin-left: 10%">
+                        <p:tagCloud model="#{data.regions}">
+                        </p:tagCloud>
                     </p:fieldset>
                 </div>
             </div>
