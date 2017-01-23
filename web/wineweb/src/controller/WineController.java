@@ -27,16 +27,6 @@ public class WineController implements Serializable {
 
     private static Wine wine = new Wine();
     private String searchString;
-    private Map<String, List<String>> results;
-    private Random rnd = new Random();
-
-    private void setResults(Map<String, List<String>> results) {
-        this.results = results;
-    }
-
-    private Map<String, List<String>> getResults() {
-        return this.results;
-    }
 
     public void setSearchString(String searchString) {
         this.searchString = searchString;
@@ -51,99 +41,6 @@ public class WineController implements Serializable {
 
     }
 
-    public TagCloudModel getRegions() {
-        if(this.results != null) {
-            List<String> regions = this.results.get("regions");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : regions) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-    }
-
-    public TagCloudModel getSubClass() {
-        if(this.results != null) {
-            List<String> subclass = this.results.get("subclass");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : subclass) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
-    }
-
-    public TagCloudModel getSuperClass() {
-        if(this.results != null) {
-            List<String> superclass = this.results.get("superclass");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : superclass) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-    }
-
-    public  TagCloudModel getSynonyms() {
-        if(this.results != null) {
-            List<String> synonyms = this.results.get("synonyms");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : synonyms) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
-    }
-
-    public TagCloudModel getLocality() {
-        if(this.results != null) {
-            List<String> locality = this.results.get("locality");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : locality) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
-    }
-
-    public TagCloudModel getGrowers() {
-        if(this.results != null) {
-            List<String> growers = this.results.get("growers");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : growers) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(5, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
-    }
-
     private Wine selectedWine;
 
     public Wine getSelectedWine() {
@@ -154,11 +51,6 @@ public class WineController implements Serializable {
         this.selectedWine = selectedWine;
     }
 
-    public String submitSearch() {
-        setResults(this.semanticSearch(this.searchString));
-        return "searchresults";
-    }
-
     /**
      * Helper-methode
      * return list of regions which occur in searchResult for semantic search suggestion
@@ -166,7 +58,7 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private List<String> getRegionsFromSearchResult(List<Wine> resultList) {
+    private static List<String> getRegionsFromSearchResult(List<Wine> resultList) {
         List<String> regions = new ArrayList<>();
         for (Wine w : resultList) {
             regions.add(w.getWineRegion());
@@ -182,7 +74,7 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private List<String> getGrowerFromSearchResult(List<Wine> resultList) {
+    private static List<String> getGrowerFromSearchResult(List<Wine> resultList) {
         List<String> growers = new ArrayList<>();
         for (Wine w : resultList) {
             growers.add(w.getWineGrower());
@@ -198,13 +90,31 @@ public class WineController implements Serializable {
      * @param resultList
      * @return
      */
-    private List<String> getLocalityFromSearchResult(List<Wine> resultList) {
+    private static List<String> getLocalityFromSearchResult(List<Wine> resultList) {
         List<String> localities = new ArrayList<>();
         for (Wine w : resultList) {
             localities.add(w.getLocality());
         }
         List<String> locality = localities.stream().distinct().collect(Collectors.toList());
         return locality;
+    }
+
+    private List<String> getWineGrapeFromSearchResult(List<Wine> resultList) {
+        List<String> wineGrape = new ArrayList<>();
+        for (Wine w : resultList) {
+            wineGrape.add(w.getLocality());
+        }
+        List<String> wineGrapes = wineGrape.stream().distinct().collect(Collectors.toList());
+        return wineGrapes;
+    }
+
+    private List<String> getWineCategoryFromSearchResult(List<Wine> resultList) {
+        List<String> wineCategory = new ArrayList<>();
+        for (Wine w : resultList) {
+            wineCategory.add(w.getLocality());
+        }
+        List<String> wineCategories = wineCategory.stream().distinct().collect(Collectors.toList());
+        return wineCategories;
     }
 
 
@@ -220,13 +130,17 @@ public class WineController implements Serializable {
         if (!synonyms.isEmpty()) result.put("synonyms", synonyms);
 
         //db
-        List<Wine> dbResults = wine.searchForSubstring(word);
+        List<Wine> dbResults = wine.searchForSubstring(word, "", "", "");
         List<String> locality = getLocalityFromSearchResult(dbResults);
-        if (!locality.isEmpty()) result.put("locality", locality);
+        result.put("locality", locality);
         List<String> growers = getGrowerFromSearchResult(dbResults);
-        if (!growers.isEmpty()) result.put("growers", growers);
+        result.put("growers", growers);
         List<String> regions = getRegionsFromSearchResult(dbResults);
-        if (!regions.isEmpty()) result.put("regions", regions);
+        result.put("regions", regions);
+        List<String> wineGrapes = getWineGrapeFromSearchResult(dbResults);
+        result.put("wineGrapes", wineGrapes);
+        List<String> wineCategories = getWineCategoryFromSearchResult(dbResults);
+        result.put("wineCategories", wineCategories);
 
         return result;
     }

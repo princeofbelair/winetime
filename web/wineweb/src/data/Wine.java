@@ -163,17 +163,25 @@ public class Wine {
      * @param word
      * @return
      */
-    public List<Wine> searchForSubstring(String word) {
+    public List<Wine> searchForSubstring(String word, String region, String grower, String locality) {
         String query = "select Id, Weinname, Weinsorte, Weinkategorie, Winzer, Region, Ort " +
                         "from wines " +
-                        "WHERE Weinname like lower(\"%" + word + "%\") or " +
+                        "WHERE (Weinname like lower(\"%" + word + "%\") or " +
                         "Weinsorte like lower(\"%" + word + "%\") or " +
                         "Weinkategorie like lower(\"%" + word + "%\") or " +
                         "Winzer like lower(\"%" + word + "%\") or " +
                         "Region like lower(\"%" + word + "%\") or " +
-                        "Ort like lower(\"%" + word + "%\")" +
-                        "AND Region ";
+                        "Ort like lower(\"%" + word + "%\"))";
 
+        if (!region.isEmpty()) {
+            query += " and Region like lower(\"%" + region + "%\")";
+        }
+        if (!grower.isEmpty()) {
+            query += " and Winzer like lower(\"%" + grower + "%\")";
+        }
+        if (!locality.isEmpty()) {
+            query += " and Ort like lower(\"%" + locality + "%\")";
+        }
         return executeQuery(query);
     }
 
