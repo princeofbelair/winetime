@@ -15,9 +15,11 @@
     <div>&nbsp;</div>
 
     <div align="center">
-        <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
-        <p:inputText placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
-        <p:commandButton value="Suchen" type="button" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
+        <h:form>
+            <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
+            <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
+            <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
+        </h:form>
     </div>
     <div>&nbsp;</div>
 

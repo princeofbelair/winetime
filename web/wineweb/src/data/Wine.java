@@ -164,10 +164,10 @@ public class Wine {
      * @return
      */
     public List<Wine> searchForSubstring(String word) {
-        String query = "select Id, Weinname, Weinsort, Weinkategorie, Winzer, Region, Ort " +
+        String query = "select Id, Weinname, Weinsorte, Weinkategorie, Winzer, Region, Ort " +
                         "from wines " +
                         "WHERE Weinname like lower(\"%" + word + "%\") or " +
-                        "Weinsort like lower(\"%" + word + "%\") or " +
+                        "Weinsorte like lower(\"%" + word + "%\") or " +
                         "Weinkategorie like lower(\"%" + word + "%\") or " +
                         "Winzer like lower(\"%" + word + "%\") or " +
                         "Region like lower(\"%" + word + "%\") or " +
@@ -183,10 +183,10 @@ public class Wine {
      * @return
      */
     public List<Wine> searchForString(String word) {
-        String query = "select Id, Weinname, Weinsort, Weinkategorie, Winzer, Region, Ort " +
+        String query = "select Id, Weinname, Weinsorte, Weinkategorie, Winzer, Region, Ort " +
                 "from wines " +
                 "WHERE Weinname like lower(\"" + word + "\") or " +
-                "Weinsort like lower(\"" + word + "\") or " +
+                "Weinsorte like lower(\"" + word + "\") or " +
                 "Weinkategorie like lower(\"" + word + "\") or " +
                 "Winzer like lower(\"" + word + "\") or " +
                 "Region like lower(\"" + word + "\") or " +
@@ -292,7 +292,7 @@ public class Wine {
                 Wine wine = new Wine();
                 wine.setId(rs.getInt("Id"));
                 wine.setLabel(rs.getString("Weinname"));
-                wine.setWineGrape(rs.getString("Weinsort"));
+                wine.setWineGrape(rs.getString("Weinsorte"));
                 wine.setWineCategory(rs.getString("Weinkategorie"));
                 wine.setWineGrower(rs.getString("Winzer"));
                 wine.setWineRegion(rs.getString("Region"));
