@@ -129,6 +129,7 @@
                 <div class="ui-grid-col-11">
                     <p:fieldset legend="Suchvorschläge" style="margin-left: 10%">
                         <p:tagCloud model="#{data.regions}">
+                            <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}" />
                         </p:tagCloud>
                     </p:fieldset>
                 </div>
