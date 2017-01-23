@@ -121,18 +121,19 @@ public class WineController implements Serializable {
     private Map<String, List<String>> semanticSearch(String word) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
 
+        //TODO leerzeichen löschen!!!
         //sparql
         List<String> subClass = wine.querySubClass(word);
-        if (!subClass.isEmpty()) result.put("subClass", subClass);
+        result.put("subClass", subClass);
         List<String> superClass = wine.querySuperClass(word);
-        if (!subClass.isEmpty()) result.put("superClass", superClass);
+        result.put("superClass", superClass);
         List<String> synonyms = wine.queryEquivalentClass(word);
-        if (!synonyms.isEmpty()) result.put("synonyms", synonyms);
+        result.put("synonyms", synonyms);
 
         //db
-        List<Wine> dbResults = wine.searchForSubstring(word, "", "", "");
-        List<String> locality = getLocalityFromSearchResult(dbResults);
-        result.put("locality", locality);
+        List<Wine> dbResults = wine.searchForSubstring(word, "", "", "", "", "");
+        List<String> localities = getLocalityFromSearchResult(dbResults);
+        result.put("locality", localities);
         List<String> growers = getGrowerFromSearchResult(dbResults);
         result.put("growers", growers);
         List<String> regions = getRegionsFromSearchResult(dbResults);
@@ -148,7 +149,7 @@ public class WineController implements Serializable {
     public static void main(String[] argv) throws IOException {
         //List<Wine> resultList = getWines();
         Wine wine = new Wine();
-        List<Wine> sW = wine.searchForSubstring("Riesling", "Kamptal", "", "");
+        List<Wine> sW = wine.searchForSubstring("Riesling", "Kamptal", "", "", "", "");
         List<Wine> list = wine.searchForString("Loimer");
         List<Wine> wineFrom = wine.searchWinesFromRegion("Wachau");
         List<String> stringList = wine.queryEquivalentClass("Chardonnay");
