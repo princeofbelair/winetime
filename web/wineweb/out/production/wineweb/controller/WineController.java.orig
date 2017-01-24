@@ -1,7 +1,7 @@
 package controller;
 
 import data.Wine;
-//import org.apache.jena.base.Sys;
+import org.apache.jena.base.Sys;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -34,8 +34,6 @@ public class WineController implements Serializable {
     private String locality = "";
     private String region = "";
     private String grower = "";
-    private String wineCategory = "";
-    private String wineGrape = "";
 
     private void setResults(Map<String, List<String>> results) {
         this.results = results;
@@ -54,7 +52,7 @@ public class WineController implements Serializable {
     }
 
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, wineCategory, wineGrape);
+        return wine.searchForSubstring(this.searchString, region, grower, locality);
 
     }
 
@@ -239,17 +237,15 @@ public class WineController implements Serializable {
 
 
     private Map<String, List<String>> semanticSearch(String word) {
-        word = word.toLowerCase();
         Map<String, List<String>> result = new HashMap<String, List<String>>();
 
+        //TODO leerzeichen löschen!!!
         //sparql
-        //noch schauen obs wirklich geht
-        String changedWord = word.replace(' ', '\u0000');
-        List<String> subClass = wine.querySubClass(changedWord);
+        List<String> subClass = wine.querySubClass(word);
         result.put("subClass", subClass);
-        List<String> superClass = wine.querySuperClass(changedWord);
+        List<String> superClass = wine.querySuperClass(word);
         result.put("superClass", superClass);
-        List<String> synonyms = wine.queryEquivalentClass(changedWord);
+        List<String> synonyms = wine.queryEquivalentClass(word);
         result.put("synonyms", synonyms);
 
         //db
@@ -268,7 +264,20 @@ public class WineController implements Serializable {
         return result;
     }
 
+<<<<<<< HEAD
+    public static void main(String[] argv) throws IOException {
+        //List<Wine> resultList = getWines();
+        Wine wine = new Wine();
+        List<Wine> sW = wine.searchForSubstring("Riesling", "Kamptal", "", "", "", "");
+        List<Wine> list = wine.searchForString("Loimer");
+        List<Wine> wineFrom = wine.searchWinesFromRegion("Wachau");
+        List<String> stringList = wine.queryEquivalentClass("Chardonnay");
+        List<String> regions = new ArrayList<>();
+
+        //Map<String, List<String>> test = semanticSearch("sdgdf");
+=======
     private int getRandomNumber(int maximum, int minimum) {
+>>>>>>> 9b67482a87cb11f312f51f86e22447bb6c155013
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
     }
