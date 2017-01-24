@@ -52,7 +52,7 @@ public class WineController implements Serializable {
     }
 
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality);
+        return wine.searchForSubstring(this.searchString, region, grower, locality, "", "");
 
     }
 
