@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * ManagedBean for Index View
+ * ManagedBean for Index, Searchresults View
  */
 
 @ManagedBean(name = "data")
@@ -34,110 +34,116 @@ public class WineController implements Serializable {
     private String locality = "";
     private String region = "";
     private String grower = "";
-    private String wineCategory = "";
-    private String wineGrape = "";
+    private String subclass = "";
+    private String superclass = "";
+    private String synonym = "";
+    private String grape = "";
+    private String winecategory = "";
 
+    /**
+     * Default Setter-Method for var results
+     *
+     * @param results
+     */
     private void setResults(Map<String, List<String>> results) {
         this.results = results;
     }
 
+    /**
+     * Default Getter-Method for var resutls
+     *
+     * @return
+     */
     private Map<String, List<String>> getResults() {
         return this.results;
     }
 
+    /**
+     * Default Setter-Method for var searchString
+     *
+     * @param searchString
+     */
     public void setSearchString(String searchString) {
         this.searchString = searchString;
     }
 
+    /**
+     * Default Getter-Method for var searchString
+     *
+     * @return
+     */
     public String getSearchString() {
         return this.searchString;
     }
 
+    /**
+     * Getter-Method for Wines
+     * Returns all wines for the view searchresults.xhtml which can be accessed by data.wines
+     * Additionally a filter is applied, which is set by clicking on the displayed semantic content
+     *
+     * @return
+     */
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, wineCategory, wineGrape);
+        return wine.searchForSubstring(this.searchString, region, grower, locality, "", "");
 
     }
 
-    public TagCloudModel getRegions() {
-        if(this.results != null) {
-            List<String> regions = this.results.get("regions");
-            TagCloudModel model = new DefaultTagCloudModel();
+    /**
+     * TagCloudModels for all filter options based on semantic content including:
+     *   Regions
+     *   Subclass
+     *   Superclass
+     *   Synonyms
+     *   Locality
+     *   Grower
+     *   Grape
+     *   Wine Category
+     *
+     * @return DefaultTagCloudModel
+     */
 
-            for (String r : regions) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
-            }
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
+    public TagCloudModel getRegions() {
+        return generateModel("regions");
     }
 
     public TagCloudModel getSubClass() {
-        if(this.results != null) {
-            List<String> subclass = this.results.get("subclass");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : subclass) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
+        return generateModel("subClass");
     }
 
     public TagCloudModel getSuperClass() {
-        if(this.results != null) {
-            List<String> superclass = this.results.get("superclass");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : superclass) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
+        return generateModel("superClass");
     }
 
     public  TagCloudModel getSynonyms() {
-        if(this.results != null) {
-            List<String> synonyms = this.results.get("synonyms");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : synonyms) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
+        return generateModel("synonyms");
     }
 
     public TagCloudModel getLocality() {
-        if(this.results != null) {
-            List<String> locality = this.results.get("locality");
-            TagCloudModel model = new DefaultTagCloudModel();
-
-            for (String r : locality) {
-                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
-            }
-
-            return model;
-        } else {
-            return new DefaultTagCloudModel();
-        }
-
+        return generateModel("locality");
     }
 
     public TagCloudModel getGrowers() {
+        return generateModel("growers");
+    }
+
+    public TagCloudModel getGrapes() {
+        return generateModel("wineGrapes");
+    }
+
+    public TagCloudModel getWinecategory() {
+        return generateModel("wineCategories");
+    }
+
+    /**
+     * Helper-Method for generating a DefaultTagCloudModel of a given attribute
+     * to display semantic data in view searchresults.xhtml
+     *
+     * @param attribute
+     * @return DefaultTagCloudModel
+     */
+    private TagCloudModel generateModel(String attribute) {
         if(this.results != null) {
-            List<String> growers = this.results.get("growers");
+            List<String> growers = this.results.get(attribute);
             TagCloudModel model = new DefaultTagCloudModel();
 
             for (String r : growers) {
@@ -148,20 +154,104 @@ public class WineController implements Serializable {
         } else {
             return new DefaultTagCloudModel();
         }
-
     }
+
+    /**
+     * Action-Methods for semantic contents
+     * Sets the private fields depending on which semantic option is clicked
+     *
+     * @param event
+     */
 
     public void onRegionSelect(SelectEvent event) {
-        TagCloudItem item = (TagCloudItem) event.getObject();
-        this.region = item.getLabel();
+        resetFields();
+        this.region = getLabelOfItem(event);
     }
 
+    public void onSubclassSelect(SelectEvent event) {
+        resetFields();
+        this.subclass = getLabelOfItem(event);
+    }
+
+    public void onSuperclassSelect(SelectEvent event) {
+        resetFields();
+        this.superclass = getLabelOfItem(event);
+    }
+
+    public void onSynonymSelect(SelectEvent event) {
+        resetFields();
+        this.synonym = getLabelOfItem(event);
+    }
+
+    public void onLocalitySelect(SelectEvent event) {
+        resetFields();
+        this.locality = getLabelOfItem(event);
+    }
+
+    public void onGrowerSelect(SelectEvent event) {
+        resetFields();
+        this.grower = getLabelOfItem(event);
+    }
+
+    public void onGrapeSelect(SelectEvent event) {
+        resetFields();
+        this.grape = getLabelOfItem(event);
+    }
+
+    public void onWinecategorySelect(SelectEvent event) {
+        resetFields();
+        this.winecategory = getLabelOfItem(event);
+    }
+
+    /**
+     * Helper-Method for labels of TagCloudItems
+     * Returns labels of a given TagCloudItem
+     *
+     * @param event
+     * @return String
+     */
+    private String getLabelOfItem(SelectEvent event) {
+        TagCloudItem item = (TagCloudItem) event.getObject();
+        return item.getLabel();
+    }
+
+    /**
+     * Action-Method for searching
+     * Gets fired if the searchbutton is clicked;
+     * Sets the val of results with the semantic data of the triplestore
+     * Returns view searchresults.xhtml
+     *
+     * @return String
+     */
     public String submitSearch() {
         setResults(this.semanticSearch(this.searchString));
+        resetFields();
         return "searchresults";
     }
 
+    /**
+     * Helper-Method for resetting semantic search fields if a new search is started
+     */
+    private void resetFields() {
+        this.region = "";
+        this.subclass = "";
+        this.superclass = "";
+        this.synonym = "";
+        this.locality = "";
+        this.grower = "";
+        this.grape = "";
+        this.winecategory = "";
+    }
+
+    /**
+     * The selected wine of the table
+     */
     private Wine selectedWine;
+
+    /**
+     * Getter- and Setter-Methods for var selectedWine
+     *
+     */
 
     public Wine getSelectedWine() {
         return selectedWine;
@@ -268,6 +358,13 @@ public class WineController implements Serializable {
         return result;
     }
 
+    /**
+     * Helper-Method to get a random number in a given range
+     *
+     * @param maximum
+     * @param minimum
+     * @return
+     */
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
