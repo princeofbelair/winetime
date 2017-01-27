@@ -331,17 +331,22 @@ public class WineController implements Serializable {
     private Map<String, List<String>> semanticSearch(String word) {
         word = word.toLowerCase();
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-
+        String changedWord;
         //sparql
         //noch schauen obs wirklich geht
-        String changedWord = word.replace(" ", "");
+        if (word.contains(" ")) {
+            changedWord = word.replace(" ", "");
+            changedWord = changedWord.trim();
+        } else {
+            changedWord = word;
+        }
+
         List<String> subClass = wine.querySubClass(changedWord);
         result.put("subClass", subClass);
         List<String> superClass = wine.querySuperClass(changedWord);
-        result.put("superClass", superClass);
-        List<String> synonyms = wine.queryEquivalentClass(changedWord);
-        result.put("synonyms", synonyms);
-
+        if(superClass.contains("wine")){
+            superClass.remove("wine");
+        }
         //db
         List<Wine> dbResults = wine.searchForSubstring(word, "", "", "", "", "");
         List<String> localities = getLocalityFromSearchResult(dbResults);
