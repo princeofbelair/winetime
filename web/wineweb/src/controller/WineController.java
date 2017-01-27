@@ -379,6 +379,12 @@ public class WineController implements Serializable {
         return rnd.nextInt(maximum - minimum + 1) + minimum;
     }
 
+    /**
+     * Helper-Method to decoded a word in UTF-8 to support special characters
+     *
+     * @param word
+     * @return
+     */
     private String decodeString(String word) {
         String wordDecoded = "";
         try {
