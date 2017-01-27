@@ -17,7 +17,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,7 +45,26 @@ public class WineController implements Serializable {
     private String grape = "";
     private String winecategory = "";
     private static int SUGGESTIONS_SIZE = 15;
+    private String showSynonyms = "normal";
+    private String showSuperClass = "normal";
+    private String showSubClass = "normal";
+    private String message = "";
 
+    public String getShowSynonyms() { return this.showSynonyms; }
+
+    public void setShowSynonyms(String showSuggestion) { this.showSynonyms = showSuggestion; }
+
+    public String getShowSuperClass() { return this.showSynonyms; }
+
+    public void setShowSuperClass(String showSuperClass) { this.showSuperClass = showSuperClass; }
+
+    public String getShowSubClass() { return this.showSuperClass; }
+
+    public void setShowSubClass(String showSubClass) { this.showSubClass = showSubClass; }
+
+    public String getMessage() { return this.message; }
+
+    public void setMessage(String message) { this.message = message; }
     /**
      * Default Setter-Method for var results
      *
@@ -88,7 +109,7 @@ public class WineController implements Serializable {
      * @return
      */
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, "", "");
+        return wine.searchForSubstring(this.searchString, region, grower, locality, winecategory, grape);
 
     }
 
@@ -118,7 +139,7 @@ public class WineController implements Serializable {
         return generateModel("superClass");
     }
 
-    public  TagCloudModel getSynonyms() {
+    public TagCloudModel getSynonyms() {
         return generateModel("synonyms");
     }
 
@@ -155,6 +176,43 @@ public class WineController implements Serializable {
                 model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
                 i++;
                 if(i == SUGGESTIONS_SIZE) { break; }
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+    }
+
+    /**
+     * Helper-Method for generating a DefaultTagCloudModel of a semantic attributes
+     * to display semantic data in view searchresults.xhtml
+     *
+     * @return DefaultTagCloudModel
+     */
+    private TagCloudModel generateSemanticModel() {
+        if(this.results != null) {
+            List<String> subClass = this.results.get("subClass");
+            List<String> superClass = this.results.get("superClass");
+            List<String> synonyms = this.results.get("synonyms");
+
+            TagCloudModel model = new DefaultTagCloudModel();
+            int i = 0;
+
+            for (String r : subClass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
+            }
+            for (String r : superClass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
+            }
+            for (String r : synonyms) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
             }
 
             return model;
@@ -233,7 +291,35 @@ public class WineController implements Serializable {
     public String submitSearch() {
         setResults(this.semanticSearch(this.searchString));
         resetFields();
+        proofIfEmpty();
         return "searchresults";
+    }
+
+    /**
+     * Proofs if one of the lists bellow is empty, so that the view does not display these
+     */
+    private void proofIfEmpty() {
+        if(results.get("synonyms").isEmpty()) {
+            this.showSynonyms = "none";
+        } else {
+            this.showSynonyms = "normal";
+        }
+        if(results.get("subClass").isEmpty()) {
+            this.showSubClass = "none";
+        } else {
+            this.showSubClass = "normal";
+        }
+        if(results.get("superClass").isEmpty()) {
+            this.showSuperClass = "none";
+        } else {
+            this.showSuperClass = "normal";
+        }
+
+        if(results.get("synonyms").isEmpty() && results.get("subClass").isEmpty() && results.get("superClass").isEmpty()) {
+            this.message = "Message";
+        } else {
+            this.message = "";
+        }
     }
 
     /**
@@ -335,10 +421,9 @@ public class WineController implements Serializable {
     }
 
 
-    private Map<String, List<String>> semanticSearch(String w) {
+    private Map<String, List<String>> semanticSearch(String word) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-        String word = decodeString(w);
-        String changedWord = changeWord(decodeString(word));
+        String changedWord = changeWord(word);
 
         List<String> subClass = wine.querySubClass(changedWord);
         List<String> filteredSubClass = filter(subClass);
@@ -411,22 +496,5 @@ public class WineController implements Serializable {
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
-    }
-
-    /**
-     * Helper-Method to decoded a word in UTF-8 to support special characters
-     *
-     * @param word
-     * @return
-     */
-    private String decodeString(String word) {
-        String wordDecoded = "";
-        try {
-            wordDecoded = URLDecoder.decode(word, "UTF-8");
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return wordDecoded;
     }
 }
