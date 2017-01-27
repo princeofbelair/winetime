@@ -334,7 +334,7 @@ public class WineController implements Serializable {
 
         //sparql
         //noch schauen obs wirklich geht
-        String changedWord = word.replace(' ', '\u0000');
+        String changedWord = word.replace(" ", "");
         List<String> subClass = wine.querySubClass(changedWord);
         result.put("subClass", subClass);
         List<String> superClass = wine.querySuperClass(changedWord);
