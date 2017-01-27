@@ -16,7 +16,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -117,7 +119,7 @@ public class WineController implements Serializable {
         return generateModel("superClass");
     }
 
-    public  TagCloudModel getSynonyms() {
+    public TagCloudModel getSynonyms() {
         return generateModel("synonyms");
     }
 
@@ -154,6 +156,43 @@ public class WineController implements Serializable {
                 model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
                 i++;
                 if(i == SUGGESTIONS_SIZE) { break; }
+            }
+
+            return model;
+        } else {
+            return new DefaultTagCloudModel();
+        }
+    }
+
+    /**
+     * Helper-Method for generating a DefaultTagCloudModel of a semantic attributes
+     * to display semantic data in view searchresults.xhtml
+     *
+     * @return DefaultTagCloudModel
+     */
+    private TagCloudModel generateSemanticModel() {
+        if(this.results != null) {
+            List<String> subClass = this.results.get("subClass");
+            List<String> superClass = this.results.get("superClass");
+            List<String> synonyms = this.results.get("synonyms");
+
+            TagCloudModel model = new DefaultTagCloudModel();
+            int i = 0;
+
+            for (String r : subClass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
+            }
+            for (String r : superClass) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
+            }
+            for (String r : synonyms) {
+                model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE/3) { break; }
             }
 
             return model;
@@ -398,22 +437,5 @@ public class WineController implements Serializable {
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
-    }
-
-    /**
-     * Helper-Method to decoded a word in UTF-8 to support special characters
-     *
-     * @param word
-     * @return
-     */
-    private String decodeString(String word) {
-        String wordDecoded = "";
-        try {
-            wordDecoded = URLDecoder.decode(word, "UTF-8");
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return wordDecoded;
     }
 }
