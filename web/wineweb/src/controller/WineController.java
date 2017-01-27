@@ -3,6 +3,7 @@ package controller;
 import data.Wine;
 //import org.apache.jena.base.Sys;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -43,8 +44,27 @@ public class WineController implements Serializable {
     private String synonym = "";
     private String grape = "";
     private String winecategory = "";
-    private static int SUGGESTIONS_SIZE = 15;
+    private static int SUGGESTIONS_SIZE = 10;
+    private String showSynonyms = "normal";
+    private String showSuperClass = "normal";
+    private String showSubClass = "normal";
+    private String message = "";
 
+    public String getShowSynonyms() { return this.showSynonyms; }
+
+    public void setShowSynonyms(String showSuggestion) { this.showSynonyms = showSuggestion; }
+
+    public String getShowSuperClass() { return this.showSynonyms; }
+
+    public void setShowSuperClass(String showSuperClass) { this.showSuperClass = showSuperClass; }
+
+    public String getShowSubClass() { return this.showSuperClass; }
+
+    public void setShowSubClass(String showSubClass) { this.showSubClass = showSubClass; }
+
+    public String getMessage() { return this.message; }
+
+    public void setMessage(String message) { this.message = message; }
     /**
      * Default Setter-Method for var results
      *
@@ -89,7 +109,7 @@ public class WineController implements Serializable {
      * @return
      */
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, "", "");
+        return wine.searchForSubstring(this.searchString, region, grower, locality, winecategory, grape);
 
     }
 
@@ -271,7 +291,35 @@ public class WineController implements Serializable {
     public String submitSearch() {
         setResults(this.semanticSearch(this.searchString));
         resetFields();
+        proofIfEmpty();
         return "searchresults";
+    }
+
+    /**
+     * Proofs if one of the lists bellow is empty, so that the view does not display these
+     */
+    private void proofIfEmpty() {
+        if(results.get("synonyms").isEmpty()) {
+            this.showSynonyms = "none";
+        } else {
+            this.showSynonyms = "normal";
+        }
+        if(results.get("subClass").isEmpty()) {
+            this.showSubClass = "none";
+        } else {
+            this.showSubClass = "normal";
+        }
+        if(results.get("superClass").isEmpty()) {
+            this.showSuperClass = "none";
+        } else {
+            this.showSuperClass = "normal";
+        }
+
+        if(results.get("synonyms").isEmpty() && results.get("subClass").isEmpty() && results.get("superClass").isEmpty()) {
+            this.message = "Es konnten keine Vorschläge zu diesem Begriff gefunden werden!";
+        } else {
+            this.message = "";
+        }
     }
 
     /**
@@ -366,7 +414,7 @@ public class WineController implements Serializable {
     private List<String> getWineCategoryFromSearchResult(List<Wine> resultList) {
         List<String> wineCategory = new ArrayList<>();
         for (Wine w : resultList) {
-            wineCategory.add(w.getLocality());
+            wineCategory.add(w.getWineCategory());
         }
         List<String> wineCategories = wineCategory.stream().distinct().collect(Collectors.toList());
         return wineCategories;
@@ -397,13 +445,25 @@ public class WineController implements Serializable {
         List<String> wineGrapes = getWineGrapeFromSearchResult(dbResults);
         result.put("wineGrapes", wineGrapes);
         List<String> wineCategories = getWineCategoryFromSearchResult(dbResults);
+        if (containsCaseInsensitive(word, wineCategories))wineCategories.remove(word);
+        if(wineCategories.size() <= 1)wineCategories.remove(0);
         result.put("wineCategories", wineCategories);
 
         return result;
     }
 
+    public boolean containsCaseInsensitive(String s, List<String> l){
+        for (String string : l){
+            if (string.equalsIgnoreCase(s)){
+                l.remove(string);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private List<String> filter (List<String> list) {
-        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte"};
+        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte", "dessertwine", "redwine", "whitewine", "sparklingwine", "rosewine", "winery"};
         for (String s : matches)
         {
             if (list.contains(s))
@@ -412,14 +472,25 @@ public class WineController implements Serializable {
                 break;
             }
         }
-        return list;
+        List<String> changedList = new ArrayList<>();
+        for (String s : list) {
+            String changedString;
+            if (s.contains("_")) {
+                changedString = s.replace("_", " ");
+            } else {
+                changedString = s;
+            }
+            changedList.add(WordUtils.capitalizeFully(changedString));
+        }
+
+        return changedList;
     }
 
     private String changeWord (String word) {
         word = word.toLowerCase();
         String changedWord;
         if (word.contains(" ")) {
-            changedWord = word.replace(" ", "");
+            changedWord = word.replace(" ", "_");
         } else {
             changedWord = word;
         }

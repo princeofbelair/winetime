@@ -15,10 +15,9 @@
     <h2 style="text-align: center; color: #b30000;font-family: Verdana">SEMANTISCHE SUCHE NACH WEINEN</h2>
     <div>&nbsp;</div>
 
-    <div align="center">
-        <h:form>
-            <h:outputText value="Suche: " style="font-size: larger; font-weight: bold; font-family: Verdana"/>
-            <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput"/>
+    <div align="left">
+        <h:form style="margin-left: 2%">
+            <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 300px;" id="semanticSearchInput"/>
             <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
         </h:form>
     </div>
@@ -27,7 +26,7 @@
     <p:outputPanel>
         <div class="ui-grid">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-11" style="margin-left:5%">
+                <div class="ui-grid-col-9" style="margin-left:2%">
                     <h:form id="myform">
                         <p:dataTable var="wine"
                                      id="singleDT"
@@ -46,6 +45,7 @@
                                      emptyMessage="Es wurden keine passenden Einträge gefunden!"
                                      selectionMode="single"
                                      selection="#{data.selectedWine}"
+                                     tableStyle="height:365px;"
                                      rowKey="#{wine.id}">
                             <f:facet name="header">
                                 <p:outputPanel>
@@ -91,123 +91,88 @@
                                   style="width:400px; height:400px; text-align: center">
                             <p:outputPanel id="wineDetail" style="text-align:center;">
                                 <p:graphicImage name="/images/wines.jpg" style="width: 300px"/>
-                                <h:panelGrid columns="3" columnClasses="label,value,value" style="text-align: left">
+                                <h:panelGrid columns="2" columnClasses="label,value" style="text-align: left">
 
                                     <h:outputText value="Bezeichnung:   " style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.label}" />
-                                    <h:outputText value=""/>
 
                                     <h:outputText value="Traube:" style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.wineGrape}" />
-                                    <p:link style="font-size: smaller" value="Andere Weine dieser Traube?"/>
 
                                     <h:outputText value="Sorte:" style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.wineCategory}" />
-                                    <p:link style="font-size: smaller" value="Andere Weine dieser Kategorie?"/>
 
                                     <h:outputText value="Winzer:" style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.wineGrower}" />
-                                    <p:link style="font-size: smaller" value="Andere Weine von diesem Winzer?"/>
 
                                     <h:outputText value="Region:" style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.wineRegion}" />
-                                    <p:link style="font-size: smaller" value="Andere Weine aus dieser Region?"/>
 
                                     <h:outputText value="Ort:" style="font-weight: bold; color:#b30000"/>
                                     <h:outputText value="#{data.selectedWine.locality}" />
-                                    <p:link style="font-size: smaller" value="Andere Weine aus diesem Ort?"/>
 
                                 </h:panelGrid>
                             </p:outputPanel>
                         </p:dialog>
                     </h:form>
                 </div>
-            </div>
-            <div>&nbsp;</div>
-            <!--TODO Nadine bitte pro Vorschlag, also Region, Winzer, usw. ein Fieldset plus TagCloud -->
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-11" style="margin-left: 5%">
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Regionen">
-                            <div align="center">
-                                <p:tagCloud model="#{data.regions}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}"/>
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Orte">
-                            <div align="center">
-                                <p:tagCloud model="#{data.locality}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onLocalitySelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Winzer">
-                            <div align="center">
-                                <p:tagCloud model="#{data.growers}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onGrowerSelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
-                    </div>
+                <div class="ui-grid-col-3">
+                    <p:fieldset legend="Ähnliche Begriffe" style="margin-right: 2%; min-height: 500px">
+                        <div align="center">
+                            <p:tagCloud model="#{data.synonyms}" style="display: #{data.showSynonyms}">
+                                <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                            </p:tagCloud>
+                            <p:tagCloud model="#{data.subClass}" style="display: #{data.showSubClass}">
+                                <p:ajax event="select" update="myform" listener="#{data.onSubclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                            </p:tagCloud>
+                            <p:tagCloud model="#{data.superClass}" style="display: #{data.showSuperClass}">
+                                <p:ajax event="select" update="myform" listener="#{data.onSuperclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                            </p:tagCloud>
+                            <p>#{data.message}</p>
+                        </div>
+                    </p:fieldset>
                 </div>
             </div>
+            <div>&nbsp;</div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-11" style="margin-left: 5%">
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Synonyme">
+                <div class="ui-grid-col-12" style="margin-left: 2%; margin-right: 2%">
+                    <p:fieldset legend="Suchen Sie auch nach...">
+                        <div class="ui-grid-col-3">
                             <div align="center">
-                                <c:choose>
-                                    <c:when test="${empty data.synonyms}">
-                                        var1 is empty or null.
-                                    </c:when>
-                                    <c:otherwise>
-                                        var1 is NOT empty or null.
-                                    </c:otherwise>
-                                </c:choose>
-                                <!---<c:if test="${data.synonyms > 0}">
-                                    <p>My salary is: <c:out value="${salary}"/><p>
-                                </c:if>
-                                <h:panelGroup rendered="#{data.synonyms==null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </h:panelGroup>
-                                <p:outputPanel rendered="#{data.synonyms == null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </p:outputPanel>
-                                <p:tagCloud model="#{data.synonyms}" rendered="#{not empty data.synonyms}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}"/>
-                                </p:tagCloud>-->
-                            </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Superklasse">
-                            <div align="center">
-                                <p:tagCloud model="#{data.superClass}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSuperclassSelect}" />
+                                <h3 style="color: #b30000">Regionen</h3>
+                                <p:tagCloud model="#{data.regions}">
+                                    <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}" style="font-size: 60% !important; width: auto !important;"/>
                                 </p:tagCloud>
                             </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Subklasse">
+                        </div>
+                        <div class="ui-grid-col-3">
                             <div align="center">
-                                <p:tagCloud model="#{data.subClass}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSubclassSelect}" />
+                                <p:tagCloud model="#{data.locality}">
+                                    <h3 style="color: #b30000">Orte</h3>
+                                    <p:ajax event="select" update="myform" listener="#{data.onLocalitySelect}" style="font-size: 60% !important;"/>
                                 </p:tagCloud>
                             </div>
-                        </p:fieldset>
-                    </div>
+                        </div>
+                        <div class="ui-grid-col-3">
+                            <div align="center">
+                                <p:tagCloud model="#{data.growers}">
+                                    <h3 style="color: #b30000">Winzer</h3>
+                                    <p:ajax event="select" update="myform" listener="#{data.onGrowerSelect}" style="font-size: 60% !important;"/>
+                                </p:tagCloud>
+                            </div>
+                        </div>
+                        <div class="ui-grid-col-3">
+                            <div align="center">
+                                <p:tagCloud model="#{data.winecategory}">
+                                    <h3 style="color: #b30000">Sorten</h3>
+                                    <p:ajax event="select" update="myform" listener="#{data.onWinecategorySelect}" style="font-size: 60% !important;border: none"/>
+                                </p:tagCloud>
+                            </div>
+                        </div>
+                    </p:fieldset>
                 </div>
             </div>
         </div>
     </p:outputPanel>
-
 </h:body>
-
-
 </html>
