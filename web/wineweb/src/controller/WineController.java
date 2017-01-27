@@ -41,6 +41,7 @@ public class WineController implements Serializable {
     private String synonym = "";
     private String grape = "";
     private String winecategory = "";
+    private static int SUGGESTIONS_SIZE = 15;
 
     /**
      * Default Setter-Method for var results
@@ -147,9 +148,12 @@ public class WineController implements Serializable {
         if(this.results != null) {
             List<String> growers = this.results.get(attribute);
             TagCloudModel model = new DefaultTagCloudModel();
+            int i = 0;
 
             for (String r : growers) {
                 model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE) { break; }
             }
 
             return model;
