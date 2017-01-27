@@ -45,6 +45,7 @@
                                      emptyMessage="Es wurden keine passenden Einträge gefunden!"
                                      selectionMode="single"
                                      selection="#{data.selectedWine}"
+                                     tableStyle="height:365px;"
                                      rowKey="#{wine.id}">
                             <f:facet name="header">
                                 <p:outputPanel>
@@ -116,7 +117,7 @@
                     </h:form>
                 </div>
                 <div class="ui-grid-col-3">
-                    <p:fieldset legend="Ähnliche Begriffe" style="margin-right: 2%; min-height: 196px">
+                    <p:fieldset legend="Ähnliche Begriffe" style="margin-right: 2%; min-height: 500px">
                         <div align="center">
                             <p:tagCloud model="#{data.synonyms}" style="display: #{data.showSynonyms}">
                                 <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}" style="font-size: 60% !important; width: auto !important;"/>
@@ -163,7 +164,7 @@
                         <div class="ui-grid-col-3">
                             <div align="center">
                                 <p:tagCloud model="#{data.winecategory}">
-                                    <h3 style="color: #b30000">Kategorien</h3>
+                                    <h3 style="color: #b30000">Sorten</h3>
                                     <p:ajax event="select" update="myform" listener="#{data.onWinecategorySelect}" style="font-size: 60% !important;border: none"/>
                                 </p:tagCloud>
                             </div>

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2137130a-ff84-48d0-bb0f-c272aaf2cad0" name="Default" comment="Provided additional data for view">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/WineController.java" afterPath="$PROJECT_DIR$/src/controller/WineController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.xhtml" afterPath="$PROJECT_DIR$/web/index.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/searchresults.xhtml" afterPath="$PROJECT_DIR$/web/searchresults.xhtml" />
     </list>
     <list id="b5657ff0-3c8b-41a6-8ac9-6769fbe71161" name="Failed commit: Default" comment="Provided additional data for view" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="WineController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3531">
-              <caret line="191" column="33" selection-start-line="191" selection-start-column="33" selection-end-line="191" selection-end-column="33" />
+            <state relative-caret-position="-3156">
+              <caret line="192" column="33" selection-start-line="192" selection-start-column="33" selection-end-line="192" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,8 +40,8 @@
       <file leaf-file-name="searchresults.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+            <state relative-caret-position="234">
+              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -1016,7 +1015,7 @@
       <workItem from="1485201257425" duration="522000" />
       <workItem from="1485252619949" duration="8000000" />
       <workItem from="1485503981497" duration="10706000" />
-      <workItem from="1485517801995" duration="6825000" />
+      <workItem from="1485517801995" duration="8652000" />
     </task>
     <task id="LOCAL-00001" summary="Provided additional data for view">
       <created>1485260052237</created>
@@ -1029,7 +1028,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87351000" />
+    <option name="totallyTimeSpent" value="89178000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1499,8 +1498,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3531">
-          <caret line="191" column="33" selection-start-line="191" selection-start-column="33" selection-end-line="191" selection-end-column="33" />
+        <state relative-caret-position="-3156">
+          <caret line="192" column="33" selection-start-line="192" selection-start-column="33" selection-end-line="192" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1509,8 +1508,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+        <state relative-caret-position="234">
+          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
           <folding />
         </state>
       </provider>
