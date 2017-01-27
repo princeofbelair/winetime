@@ -461,8 +461,8 @@ public class WineController implements Serializable {
             }
         }
         List<String> changedList = new ArrayList<>();
-        String changedString = null;
         for (String s : list) {
+            String changedString;
             if (s.contains("_")) {
                 changedString = s.replace("_", " ");
             } else {
@@ -470,7 +470,6 @@ public class WineController implements Serializable {
             }
             changedList.add(WordUtils.capitalizeFully(changedString));
         }
-        //list.replaceAll(s -> changedString);
 
         return changedList;
     }
