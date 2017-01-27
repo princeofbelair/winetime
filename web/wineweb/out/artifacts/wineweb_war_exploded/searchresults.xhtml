@@ -127,89 +127,43 @@
             <!--TODO Nadine bitte pro Vorschlag, also Region, Winzer, usw. ein Fieldset plus TagCloud -->
             <div class="ui-grid-row">
                 <div class="ui-grid-col-11" style="margin-left: 5%">
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Regionen">
+                    <div class="ui-grid-col-3">
+                        <p:scrollPanel mode="native" style="width:250px;height:200px">
                             <div align="center">
                                 <p:tagCloud model="#{data.regions}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}"/>
+                                    <h4>Andere Regionen</h4>
+                                    <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}" style="font-size: 60% !important; width: auto !important border-color: white !important"/>
                                 </p:tagCloud>
                             </div>
-                        </p:fieldset>
+                        </p:scrollPanel>
                     </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Orte">
-                            <div align="center">
-                                <p:tagCloud model="#{data.locality}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onLocalitySelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
+                    <div class="ui-grid-col-3">
+                        <div align="center">
+                            <p:tagCloud model="#{data.locality}">
+                                <h4>Andere Orte</h4>
+                                <p:ajax event="select" update="myform" listener="#{data.onLocalitySelect}" style="font-size: 60% !important;"/>
+                            </p:tagCloud>
+                        </div>
                     </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Andere Winzer">
-                            <div align="center">
-                                <p:tagCloud model="#{data.growers}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onGrowerSelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
+                    <div class="ui-grid-col-3">
+                        <div align="center">
+                            <p:tagCloud model="#{data.growers}">
+                                <h4>Andere Winzer</h4>
+                                <p:ajax event="select" update="myform" listener="#{data.onGrowerSelect}" style="font-size: 60% !important;"/>
+                            </p:tagCloud>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-11" style="margin-left: 5%">
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Synonyme">
-                            <div align="center">
-                                <c:choose>
-                                    <c:when test="${empty data.synonyms}">
-                                        var1 is empty or null.
-                                    </c:when>
-                                    <c:otherwise>
-                                        var1 is NOT empty or null.
-                                    </c:otherwise>
-                                </c:choose>
-                                <!---<c:if test="${data.synonyms > 0}">
-                                    <p>My salary is: <c:out value="${salary}"/><p>
-                                </c:if>
-                                <h:panelGroup rendered="#{data.synonyms==null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </h:panelGroup>
-                                <p:outputPanel rendered="#{data.synonyms == null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </p:outputPanel>
-                                <p:tagCloud model="#{data.synonyms}" rendered="#{not empty data.synonyms}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}"/>
-                                </p:tagCloud>-->
-                            </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Superklasse">
-                            <div align="center">
-                                <p:tagCloud model="#{data.superClass}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSuperclassSelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p:fieldset legend="Subklasse">
-                            <div align="center">
-                                <p:tagCloud model="#{data.subClass}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSubclassSelect}" />
-                                </p:tagCloud>
-                            </div>
-                        </p:fieldset>
+                    <div class="ui-grid-col-3">
+                        <div align="center">
+                            <p:tagCloud model="#{data.winecategory}">
+                                <h4>Andere Kategorien</h4>
+                                <p:ajax event="select" update="myform" listener="#{data.onWinecategorySelect}" style="font-size: 60% !important;"/>
+                            </p:tagCloud>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </p:outputPanel>
-
-
-
 </h:body>
-
-
 </html>

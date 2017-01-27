@@ -87,7 +87,7 @@ public class WineController implements Serializable {
      * @return
      */
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, "", "");
+        return wine.searchForSubstring(this.searchString, region, grower, locality, grape, winecategory);
 
     }
 
@@ -327,7 +327,7 @@ public class WineController implements Serializable {
     private List<String> getWineCategoryFromSearchResult(List<Wine> resultList) {
         List<String> wineCategory = new ArrayList<>();
         for (Wine w : resultList) {
-            wineCategory.add(w.getLocality());
+            wineCategory.add(w.getWineCategory());
         }
         List<String> wineCategories = wineCategory.stream().distinct().collect(Collectors.toList());
         return wineCategories;
