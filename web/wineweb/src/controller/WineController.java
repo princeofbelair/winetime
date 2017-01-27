@@ -2,6 +2,7 @@ package controller;
 
 import data.Wine;
 //import org.apache.jena.base.Sys;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,6 +41,7 @@ public class WineController implements Serializable {
     private String synonym = "";
     private String grape = "";
     private String winecategory = "";
+    private static int SUGGESTIONS_SIZE = 15;
 
     /**
      * Default Setter-Method for var results
@@ -145,9 +148,12 @@ public class WineController implements Serializable {
         if(this.results != null) {
             List<String> growers = this.results.get(attribute);
             TagCloudModel model = new DefaultTagCloudModel();
+            int i = 0;
 
             for (String r : growers) {
                 model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE) { break; }
             }
 
             return model;
@@ -392,5 +398,22 @@ public class WineController implements Serializable {
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
+    }
+
+    /**
+     * Helper-Method to decoded a word in UTF-8 to support special characters
+     *
+     * @param word
+     * @return
+     */
+    private String decodeString(String word) {
+        String wordDecoded = "";
+        try {
+            wordDecoded = URLDecoder.decode(word, "UTF-8");
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return wordDecoded;
     }
 }
