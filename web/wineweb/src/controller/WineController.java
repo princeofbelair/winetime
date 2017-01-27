@@ -43,7 +43,7 @@ public class WineController implements Serializable {
     private String synonym = "";
     private String grape = "";
     private String winecategory = "";
-    private static int SUGGESTIONS_SIZE = 15;
+    private static int SUGGESTIONS_SIZE = 10;
     private String showSynonyms = "normal";
     private String showSuperClass = "normal";
     private String showSubClass = "normal";
@@ -315,7 +315,7 @@ public class WineController implements Serializable {
         }
 
         if(results.get("synonyms").isEmpty() && results.get("subClass").isEmpty() && results.get("superClass").isEmpty()) {
-            this.message = "Message";
+            this.message = "Es konnten keine Vorschläge zu diesem Begriff gefunden werden!";
         } else {
             this.message = "";
         }

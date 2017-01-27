@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2137130a-ff84-48d0-bb0f-c272aaf2cad0" name="Default" comment="Provided additional data for view">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/wineweb_war_exploded/WEB-INF/classes/controller/WineController.java.orig" afterPath="$PROJECT_DIR$/out/artifacts/wineweb_war_exploded/WEB-INF/classes/controller/WineController.java.orig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/wineweb_war_exploded/searchresults.xhtml" afterPath="$PROJECT_DIR$/out/artifacts/wineweb_war_exploded/searchresults.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/WineController.java" afterPath="$PROJECT_DIR$/src/controller/WineController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.xhtml" afterPath="$PROJECT_DIR$/web/index.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/searchresults.xhtml" afterPath="$PROJECT_DIR$/web/searchresults.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wineweb.iml" afterPath="$PROJECT_DIR$/wineweb.iml" />
     </list>
     <list id="b5657ff0-3c8b-41a6-8ac9-6769fbe71161" name="Failed commit: Default" comment="Provided additional data for view" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,8 +29,8 @@
       <file leaf-file-name="WineController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="288" column="7" selection-start-line="288" selection-start-column="7" selection-end-line="288" selection-end-column="7" />
+            <state relative-caret-position="-3531">
+              <caret line="191" column="33" selection-start-line="191" selection-start-column="33" selection-end-line="191" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,11 +41,9 @@
       <file leaf-file-name="searchresults.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="136" column="45" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#div#0;n#p:outputPanel#0;n#h:body#0;n#html#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,8 +51,8 @@
       <file leaf-file-name="index.xhtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/index.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+            <state relative-caret-position="370">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -65,7 +61,7 @@
       <file leaf-file-name="Wine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/Wine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
+            <state relative-caret-position="1736">
               <caret line="165" column="138" selection-start-line="165" selection-start-column="129" selection-end-line="165" selection-end-column="138" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -116,10 +112,10 @@
         <option value="$PROJECT_DIR$/src/data/Wine.java" />
         <option value="$PROJECT_DIR$/src/helper/CharacterEncodingFilter.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/web/index.xhtml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/web/searchresults.xhtml" />
+        <option value="$PROJECT_DIR$/web/index.xhtml" />
         <option value="$PROJECT_DIR$/src/controller/WineController.java" />
+        <option value="$PROJECT_DIR$/web/searchresults.xhtml" />
       </list>
     </option>
   </component>
@@ -1020,7 +1016,7 @@
       <workItem from="1485201257425" duration="522000" />
       <workItem from="1485252619949" duration="8000000" />
       <workItem from="1485503981497" duration="10706000" />
-      <workItem from="1485517801995" duration="2994000" />
+      <workItem from="1485517801995" duration="6825000" />
     </task>
     <task id="LOCAL-00001" summary="Provided additional data for view">
       <created>1485260052237</created>
@@ -1033,7 +1029,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83520000" />
+    <option name="totallyTimeSpent" value="87351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1045,7 +1041,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="833" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="833" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1057,7 +1053,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.498452" sideWeight="0.48142165" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34817815" sideWeight="0.51857835" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39271256" sideWeight="0.51857835" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1484,7 +1480,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Wine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
+        <state relative-caret-position="1736">
           <caret line="165" column="138" selection-start-line="165" selection-start-column="129" selection-end-line="165" selection-end-column="138" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1495,16 +1491,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/index.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        <state relative-caret-position="370">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="288" column="7" selection-start-line="288" selection-start-column="7" selection-end-line="288" selection-end-column="7" />
+        <state relative-caret-position="-3531">
+          <caret line="191" column="33" selection-start-line="191" selection-start-column="33" selection-end-line="191" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1513,11 +1509,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="136" column="45" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#p:outputPanel#0;n#h:body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="167" column="45" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
