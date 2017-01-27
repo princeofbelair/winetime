@@ -44,7 +44,26 @@ public class WineController implements Serializable {
     private String grape = "";
     private String winecategory = "";
     private static int SUGGESTIONS_SIZE = 15;
+    private String showSynonyms = "normal";
+    private String showSuperClass = "normal";
+    private String showSubClass = "normal";
+    private String message = "";
 
+    public String getShowSynonyms() { return this.showSynonyms; }
+
+    public void setShowSynonyms(String showSuggestion) { this.showSynonyms = showSuggestion; }
+
+    public String getShowSuperClass() { return this.showSynonyms; }
+
+    public void setShowSuperClass(String showSuperClass) { this.showSuperClass = showSuperClass; }
+
+    public String getShowSubClass() { return this.showSuperClass; }
+
+    public void setShowSubClass(String showSubClass) { this.showSubClass = showSubClass; }
+
+    public String getMessage() { return this.message; }
+
+    public void setMessage(String message) { this.message = message; }
     /**
      * Default Setter-Method for var results
      *
@@ -89,7 +108,7 @@ public class WineController implements Serializable {
      * @return
      */
     public List<Wine> getWines() {
-        return wine.searchForSubstring(this.searchString, region, grower, locality, grape, winecategory);
+        return wine.searchForSubstring(this.searchString, region, grower, locality, winecategory, grape);
 
     }
 
@@ -271,7 +290,35 @@ public class WineController implements Serializable {
     public String submitSearch() {
         setResults(this.semanticSearch(this.searchString));
         resetFields();
+        proofIfEmpty();
         return "searchresults";
+    }
+
+    /**
+     * Proofs if one of the lists bellow is empty, so that the view does not display these
+     */
+    private void proofIfEmpty() {
+        if(results.get("synonyms").isEmpty()) {
+            this.showSynonyms = "none";
+        } else {
+            this.showSynonyms = "normal";
+        }
+        if(results.get("subClass").isEmpty()) {
+            this.showSubClass = "none";
+        } else {
+            this.showSubClass = "normal";
+        }
+        if(results.get("superClass").isEmpty()) {
+            this.showSuperClass = "none";
+        } else {
+            this.showSuperClass = "normal";
+        }
+
+        if(results.get("synonyms").isEmpty() && results.get("subClass").isEmpty() && results.get("superClass").isEmpty()) {
+            this.message = "Message";
+        } else {
+            this.message = "";
+        }
     }
 
     /**
