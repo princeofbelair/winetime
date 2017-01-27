@@ -334,10 +334,24 @@ public class WineController implements Serializable {
     }
 
 
-    private Map<String, List<String>> semanticSearch(String w) {
+    private Map<String, List<String>> semanticSearch(String word) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-        String word = decodeString(w);
-        String changedWord = changeWord(decodeString(word));
+<<<<<<< HEAD
+
+        String changedWord = changeWord(word);
+=======
+        String changedWord;
+        //sparql
+        //noch schauen obs wirklich geht
+
+        String decodedWord = decodeString(word);
+        if (decodedWord.contains(" ")) {
+            changedWord = word.replace(" ", "");
+            changedWord = changedWord.trim();
+        } else {
+            changedWord = word;
+        }
+>>>>>>> e41bf43fd6a25a0bb84c9db0e9109903c73db0eb
 
         List<String> subClass = wine.querySubClass(changedWord);
         List<String> filteredSubClass = filter(subClass);
