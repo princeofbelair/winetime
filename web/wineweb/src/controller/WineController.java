@@ -2,6 +2,7 @@ package controller;
 
 import data.Wine;
 //import org.apache.jena.base.Sys;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,6 +41,7 @@ public class WineController implements Serializable {
     private String synonym = "";
     private String grape = "";
     private String winecategory = "";
+    private static int SUGGESTIONS_SIZE = 15;
 
     /**
      * Default Setter-Method for var results
@@ -145,9 +148,12 @@ public class WineController implements Serializable {
         if(this.results != null) {
             List<String> growers = this.results.get(attribute);
             TagCloudModel model = new DefaultTagCloudModel();
+            int i = 0;
 
             for (String r : growers) {
                 model.addTag(new DefaultTagCloudItem(r, getRandomNumber(4, 1)));
+                i++;
+                if(i == SUGGESTIONS_SIZE) { break; }
             }
 
             return model;
@@ -328,20 +334,20 @@ public class WineController implements Serializable {
     }
 
 
-    private Map<String, List<String>> semanticSearch(String word) {
-        word = word.toLowerCase();
+    private Map<String, List<String>> semanticSearch(String w) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
+        String word = decodeString(w);
+        String changedWord = changeWord(decodeString(word));
 
-        //sparql
-        //noch schauen obs wirklich geht
-        String changedWord = word.replace(' ', '\u0000');
         List<String> subClass = wine.querySubClass(changedWord);
-        result.put("subClass", subClass);
+        List<String> filteredSubClass = filter(subClass);
+        result.put("subClass", filteredSubClass);
         List<String> superClass = wine.querySuperClass(changedWord);
-        result.put("superClass", superClass);
+        List<String> filteredSuperClass = filter(superClass);
+        result.put("superClass", filteredSuperClass);
         List<String> synonyms = wine.queryEquivalentClass(changedWord);
-        result.put("synonyms", synonyms);
-
+        List<String> filteredSynonyms = filter(synonyms);
+        result.put("synonyms", filteredSynonyms);
         //db
         List<Wine> dbResults = wine.searchForSubstring(word, "", "", "", "", "");
         List<String> localities = getLocalityFromSearchResult(dbResults);
@@ -358,6 +364,30 @@ public class WineController implements Serializable {
         return result;
     }
 
+    private List<String> filter (List<String> list) {
+        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte"};
+        for (String s : matches)
+        {
+            if (list.contains(s))
+            {
+                list.remove(s);
+                break;
+            }
+        }
+        return list;
+    }
+
+    private String changeWord (String word) {
+        word = word.toLowerCase();
+        String changedWord;
+        if (word.contains(" ")) {
+            changedWord = word.replace(" ", "");
+        } else {
+            changedWord = word;
+        }
+        return changedWord;
+    }
+
     /**
      * Helper-Method to get a random number in a given range
      *
@@ -368,5 +398,22 @@ public class WineController implements Serializable {
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
+    }
+
+    /**
+     * Helper-Method to decoded a word in UTF-8 to support special characters
+     *
+     * @param word
+     * @return
+     */
+    private String decodeString(String word) {
+        String wordDecoded = "";
+        try {
+            wordDecoded = URLDecoder.decode(word, "UTF-8");
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return wordDecoded;
     }
 }
