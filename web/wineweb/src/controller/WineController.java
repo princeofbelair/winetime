@@ -3,6 +3,7 @@ package controller;
 import data.Wine;
 //import org.apache.jena.base.Sys;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -327,7 +328,7 @@ public class WineController implements Serializable {
     private List<String> getWineCategoryFromSearchResult(List<Wine> resultList) {
         List<String> wineCategory = new ArrayList<>();
         for (Wine w : resultList) {
-            wineCategory.add(w.getLocality());
+            wineCategory.add(w.getWineCategory());
         }
         List<String> wineCategories = wineCategory.stream().distinct().collect(Collectors.toList());
         return wineCategories;
@@ -365,7 +366,7 @@ public class WineController implements Serializable {
     }
 
     private List<String> filter (List<String> list) {
-        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte"};
+        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte", "dessertwine", "redwine", "whitewine", "sparklingwine", "rosewine", "winery"};
         for (String s : matches)
         {
             if (list.contains(s))
@@ -374,14 +375,26 @@ public class WineController implements Serializable {
                 break;
             }
         }
-        return list;
+        List<String> changedList = new ArrayList<>();
+        String changedString = null;
+        for (String s : list) {
+            if (s.contains("_")) {
+                changedString = s.replace("_", " ");
+            } else {
+                changedString = s;
+            }
+            changedList.add(WordUtils.capitalizeFully(changedString));
+        }
+        //list.replaceAll(s -> changedString);
+
+        return changedList;
     }
 
     private String changeWord (String word) {
         word = word.toLowerCase();
         String changedWord;
         if (word.contains(" ")) {
-            changedWord = word.replace(" ", "");
+            changedWord = word.replace(" ", "_");
         } else {
             changedWord = word;
         }

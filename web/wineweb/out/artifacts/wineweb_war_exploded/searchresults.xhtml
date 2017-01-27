@@ -161,26 +161,9 @@
                     <div class="ui-grid-col-4">
                         <p:fieldset legend="Synonyme">
                             <div align="center">
-                                <c:choose>
-                                    <c:when test="${empty data.synonyms}">
-                                        var1 is empty or null.
-                                    </c:when>
-                                    <c:otherwise>
-                                        var1 is NOT empty or null.
-                                    </c:otherwise>
-                                </c:choose>
-                                <!---<c:if test="${data.synonyms > 0}">
-                                    <p>My salary is: <c:out value="${salary}"/><p>
-                                </c:if>
-                                <h:panelGroup rendered="#{data.synonyms==null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </h:panelGroup>
-                                <p:outputPanel rendered="#{data.synonyms == null}">
-                                    <p>Es wurden keine passenden Vorschläge gefunden!</p>
-                                </p:outputPanel>
-                                <p:tagCloud model="#{data.synonyms}" rendered="#{not empty data.synonyms}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}"/>
-                                </p:tagCloud>-->
+                                <p:tagCloud model="#{data.synonyms}">
+                                    <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}" />
+                                </p:tagCloud>
                             </div>
                         </p:fieldset>
                     </div>
