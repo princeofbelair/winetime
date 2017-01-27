@@ -373,10 +373,9 @@ public class WineController implements Serializable {
     }
 
 
-    private Map<String, List<String>> semanticSearch(String w) {
+    private Map<String, List<String>> semanticSearch(String word) {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-        String word = decodeString(w);
-        String changedWord = changeWord(decodeString(word));
+        String changedWord = changeWord(word);
 
         List<String> subClass = wine.querySubClass(changedWord);
         List<String> filteredSubClass = filter(subClass);
