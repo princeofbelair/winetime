@@ -329,24 +329,19 @@ public class WineController implements Serializable {
 
 
     private Map<String, List<String>> semanticSearch(String word) {
-        word = word.toLowerCase();
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-        String changedWord;
-        //sparql
-        //noch schauen obs wirklich geht
-        if (word.contains(" ")) {
-            changedWord = word.replace(" ", "");
-            changedWord = changedWord.trim();
-        } else {
-            changedWord = word;
-        }
+
+        String changedWord = changeWord(word);
 
         List<String> subClass = wine.querySubClass(changedWord);
-        result.put("subClass", subClass);
+        List<String> filteredSubClass = filter(subClass);
+        result.put("subClass", filteredSubClass);
         List<String> superClass = wine.querySuperClass(changedWord);
-        if(superClass.contains("wine")){
-            superClass.remove("wine");
-        }
+        List<String> filteredSuperClass = filter(superClass);
+        result.put("superClass", filteredSuperClass);
+        List<String> synonyms = wine.queryEquivalentClass(changedWord);
+        List<String> filteredSynonyms = filter(synonyms);
+        result.put("synonyms", filteredSynonyms);
         //db
         List<Wine> dbResults = wine.searchForSubstring(word, "", "", "", "", "");
         List<String> localities = getLocalityFromSearchResult(dbResults);
@@ -361,6 +356,30 @@ public class WineController implements Serializable {
         result.put("wineCategories", wineCategories);
 
         return result;
+    }
+
+    private List<String> filter (List<String> list) {
+        String[] matches = {"wine", "wein", "region", "winegrape", "weinsorte"};
+        for (String s : matches)
+        {
+            if (list.contains(s))
+            {
+                list.remove(s);
+                break;
+            }
+        }
+        return list;
+    }
+
+    private String changeWord (String word) {
+        word = word.toLowerCase();
+        String changedWord;
+        if (word.contains(" ")) {
+            changedWord = word.replace(" ", "");
+        } else {
+            changedWord = word;
+        }
+        return changedWord;
     }
 
     /**
