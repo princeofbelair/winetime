@@ -445,9 +445,21 @@ public class WineController implements Serializable {
         List<String> wineGrapes = getWineGrapeFromSearchResult(dbResults);
         result.put("wineGrapes", wineGrapes);
         List<String> wineCategories = getWineCategoryFromSearchResult(dbResults);
+        if (containsCaseInsensitive(word, wineCategories))wineCategories.remove(word);
+        if(wineCategories.size() <= 1)wineCategories.remove(0);
         result.put("wineCategories", wineCategories);
 
         return result;
+    }
+
+    public boolean containsCaseInsensitive(String s, List<String> l){
+        for (String string : l){
+            if (string.equalsIgnoreCase(s)){
+                l.remove(string);
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<String> filter (List<String> list) {
