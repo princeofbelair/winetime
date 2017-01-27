@@ -2,6 +2,7 @@ package controller;
 
 import data.Wine;
 //import org.apache.jena.base.Sys;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -334,7 +336,9 @@ public class WineController implements Serializable {
         String changedWord;
         //sparql
         //noch schauen obs wirklich geht
-        if (word.contains(" ")) {
+
+        String decodedWord = decodeString(word);
+        if (decodedWord.contains(" ")) {
             changedWord = word.replace(" ", "");
             changedWord = changedWord.trim();
         } else {
@@ -373,5 +377,16 @@ public class WineController implements Serializable {
     private int getRandomNumber(int maximum, int minimum) {
 
         return rnd.nextInt(maximum - minimum + 1) + minimum;
+    }
+
+    private String decodeString(String word) {
+        String wordDecoded = "";
+        try {
+            wordDecoded = URLDecoder.decode(word, "UTF-8");
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return wordDecoded;
     }
 }
