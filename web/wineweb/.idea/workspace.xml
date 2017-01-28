@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2137130a-ff84-48d0-bb0f-c272aaf2cad0" name="Default" comment="Provided additional data for view">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/wineweb/controller/WineController.java.orig" afterPath="$PROJECT_DIR$/out/production/wineweb/controller/WineController.java.orig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/WineController.java" afterPath="$PROJECT_DIR$/src/controller/WineController.java" />
     </list>
     <list id="b5657ff0-3c8b-41a6-8ac9-6769fbe71161" name="Failed commit: Default" comment="Provided additional data for view" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -29,13 +27,11 @@
       <file leaf-file-name="WineController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="408" column="33" selection-start-line="408" selection-start-column="33" selection-end-line="408" selection-end-column="33" />
+            <state relative-caret-position="575">
+              <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1973#1974#0" expanded="true" />
-                <element signature="e#2021#2022#0" expanded="true" />
-                <element signature="e#10743#10765#0" expanded="true" />
+                <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -77,8 +73,8 @@
       <file leaf-file-name="searchresults.xhtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1271">
-              <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+            <state relative-caret-position="1016">
+              <caret line="167" column="34" selection-start-line="167" selection-start-column="34" selection-end-line="167" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -101,8 +97,13 @@
         <entry file="file://$PROJECT_DIR$/web/index.xhtml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="416">
-              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-              <folding />
+              <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+              <folding>
+                <marker date="1485537421000" expanded="true" signature="211:1277" ph="..." />
+                <marker date="1485537421000" expanded="true" signature="404:415" ph="..." />
+                <marker date="1485537421000" expanded="true" signature="424:1267" ph="..." />
+                <marker date="1485537421000" expanded="true" signature="881:1224" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1093,7 +1094,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80543000" />
+    <option name="totallyTimeSpent" value="81889000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1163,15 +1164,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/WineController.java</url>
-          <line>399</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="46" />
+      <option name="time" value="47" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1194,9 +1187,7 @@
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1227,9 +1218,7 @@
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1260,9 +1249,7 @@
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1300,9 +1287,7 @@
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1331,9 +1316,7 @@
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1362,9 +1345,7 @@
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1393,9 +1374,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1462,9 +1441,7 @@
           <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1582,15 +1559,20 @@
     <entry file="file://$PROJECT_DIR$/web/index.xhtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
-          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-          <folding />
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+          <folding>
+            <marker date="1485537421000" expanded="true" signature="211:1277" ph="..." />
+            <marker date="1485537421000" expanded="true" signature="404:415" ph="..." />
+            <marker date="1485537421000" expanded="true" signature="424:1267" ph="..." />
+            <marker date="1485537421000" expanded="true" signature="881:1224" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/searchresults.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1271">
-          <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+        <state relative-caret-position="1016">
+          <caret line="167" column="34" selection-start-line="167" selection-start-column="34" selection-end-line="167" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1605,13 +1587,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/WineController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="408" column="33" selection-start-line="408" selection-start-column="33" selection-end-line="408" selection-end-column="33" />
+        <state relative-caret-position="575">
+          <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#10743#10765#0" expanded="true" />
+            <marker date="1485537421000" expanded="true" signature="15534:15603" ph="{...}" />
           </folding>
         </state>
       </provider>
