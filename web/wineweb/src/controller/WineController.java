@@ -11,9 +11,11 @@ import org.primefaces.model.tagcloud.TagCloudItem;
 import org.primefaces.model.tagcloud.TagCloudModel;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
@@ -45,20 +47,21 @@ public class WineController implements Serializable {
     private String grape = "";
     private String winecategory = "";
     private static int SUGGESTIONS_SIZE = 10;
-    private String showSynonyms = "normal";
-    private String showSuperClass = "normal";
-    private String showSubClass = "normal";
+    private String showSynonyms = "";
+    private String showSuperClass = "";
+    private String showSubClass = "";
     private String message = "";
+    private String updateMessage = "";
 
     public String getShowSynonyms() { return this.showSynonyms; }
 
-    public void setShowSynonyms(String showSuggestion) { this.showSynonyms = showSuggestion; }
+    public void setShowSynonyms(String showSynonyms) { this.showSynonyms = showSynonyms; }
 
-    public String getShowSuperClass() { return this.showSynonyms; }
+    public String getShowSuperClass() { return this.showSuperClass; }
 
     public void setShowSuperClass(String showSuperClass) { this.showSuperClass = showSuperClass; }
 
-    public String getShowSubClass() { return this.showSuperClass; }
+    public String getShowSubClass() { return this.showSubClass; }
 
     public void setShowSubClass(String showSubClass) { this.showSubClass = showSubClass; }
 
@@ -231,41 +234,49 @@ public class WineController implements Serializable {
     public void onRegionSelect(SelectEvent event) {
         resetFields();
         this.region = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onSubclassSelect(SelectEvent event) {
         resetFields();
         this.subclass = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onSuperclassSelect(SelectEvent event) {
         resetFields();
         this.superclass = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onSynonymSelect(SelectEvent event) {
         resetFields();
         this.synonym = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onLocalitySelect(SelectEvent event) {
         resetFields();
         this.locality = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onGrowerSelect(SelectEvent event) {
         resetFields();
         this.grower = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onGrapeSelect(SelectEvent event) {
         resetFields();
         this.grape = getLabelOfItem(event);
+        addMessageToView();
     }
 
     public void onWinecategorySelect(SelectEvent event) {
         resetFields();
         this.winecategory = getLabelOfItem(event);
+        addMessageToView();
     }
 
     /**
@@ -296,23 +307,31 @@ public class WineController implements Serializable {
     }
 
     /**
+     * Helper-Method that adds a message if a onSelect method is called
+     */
+    private void addMessageToView() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Info:", "Ihr Suche wurde angepasst."));
+    }
+
+    /**
      * Proofs if one of the lists bellow is empty, so that the view does not display these
      */
     private void proofIfEmpty() {
         if(results.get("synonyms").isEmpty()) {
             this.showSynonyms = "none";
         } else {
-            this.showSynonyms = "normal";
+            this.showSynonyms = "block";
         }
         if(results.get("subClass").isEmpty()) {
             this.showSubClass = "none";
         } else {
-            this.showSubClass = "normal";
+            this.showSubClass = "block";
         }
         if(results.get("superClass").isEmpty()) {
             this.showSuperClass = "none";
         } else {
-            this.showSuperClass = "normal";
+            this.showSuperClass = "block";
         }
 
         if(results.get("synonyms").isEmpty() && results.get("subClass").isEmpty() && results.get("superClass").isEmpty()) {
