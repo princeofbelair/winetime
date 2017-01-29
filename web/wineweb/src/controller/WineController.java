@@ -446,7 +446,7 @@ public class WineController implements Serializable {
         result.put("wineGrapes", wineGrapes);
         List<String> wineCategories = getWineCategoryFromSearchResult(dbResults);
         if (containsCaseInsensitive(word, wineCategories))wineCategories.remove(word);
-        if(wineCategories.size() <= 1)wineCategories.remove(0);
+        if(wineCategories.size() == 1)wineCategories.remove(0);
         result.put("wineCategories", wineCategories);
 
         return result;
