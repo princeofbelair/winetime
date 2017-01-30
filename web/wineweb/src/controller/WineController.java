@@ -4,6 +4,7 @@ import data.Wine;
 //import org.apache.jena.base.Sys;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.tagcloud.DefaultTagCloudItem;
 import org.primefaces.model.tagcloud.DefaultTagCloudModel;
@@ -239,20 +240,24 @@ public class WineController implements Serializable {
 
     public void onSubclassSelect(SelectEvent event) {
         resetFields();
-        this.subclass = getLabelOfItem(event);
+        this.searchString = getLabelOfItem(event);
+        setResults(semanticSearch(this.searchString));
         addMessageToView();
     }
 
     public void onSuperclassSelect(SelectEvent event) {
         resetFields();
-        this.superclass = getLabelOfItem(event);
+        this.searchString = getLabelOfItem(event);
+        setResults(semanticSearch(this.searchString));
         addMessageToView();
     }
 
     public void onSynonymSelect(SelectEvent event) {
         resetFields();
-        this.synonym = getLabelOfItem(event);
+        this.searchString = getLabelOfItem(event);
+        //setResults(semanticSearch(this.searchString));
         addMessageToView();
+        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
     }
 
     public void onLocalitySelect(SelectEvent event) {
