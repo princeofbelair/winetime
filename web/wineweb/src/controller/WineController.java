@@ -241,21 +241,20 @@ public class WineController implements Serializable {
     public void onSubclassSelect(SelectEvent event) {
         resetFields();
         this.searchString = getLabelOfItem(event);
-        setResults(semanticSearch(this.searchString));
         addMessageToView();
+        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
     }
 
     public void onSuperclassSelect(SelectEvent event) {
         resetFields();
         this.searchString = getLabelOfItem(event);
-        setResults(semanticSearch(this.searchString));
         addMessageToView();
+        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
     }
 
     public void onSynonymSelect(SelectEvent event) {
         resetFields();
         this.searchString = getLabelOfItem(event);
-        //setResults(semanticSearch(this.searchString));
         addMessageToView();
         RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
     }

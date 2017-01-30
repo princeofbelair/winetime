@@ -16,7 +16,9 @@
     <div>&nbsp;</div>
     <div align="left">
         <h:form id="search" style="margin-left: 2%">
-            <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 300px;" id="semanticSearchInput"/>
+            <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 300px;" id="semanticSearchInput" validatorMessage="Suchebegriff darf nur alphanumerische Zeichen enthalten.">
+                <f:validateRegex pattern="^[a-zA-Z0-9 ]*$"></f:validateRegex>
+            </p:inputText>
             <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
         </h:form>
     </div>
@@ -121,10 +123,10 @@
                             <p:tagCloud model="#{data.synonyms}" style="display: #{data.showSynonyms}" onclick="preventDefault(event)">
                                 <p:ajax event="select" update="search" listener="#{data.onSynonymSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
-                            <p:tagCloud model="#{data.subClass}" style="display: #{data.showSubClass}">
+                            <p:tagCloud model="#{data.subClass}" style="display: #{data.showSubClass}" onclick="preventDefault(event)">
                                 <p:ajax event="select" update="search" listener="#{data.onSubclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
-                            <p:tagCloud model="#{data.superClass}" style="display: #{data.showSuperClass}">
+                            <p:tagCloud model="#{data.superClass}" style="display: #{data.showSuperClass}" onclick="preventDefault(event)">
                                 <p:ajax event="select" update="search" listener="#{data.onSuperclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
                             <p>#{data.message}</p>
