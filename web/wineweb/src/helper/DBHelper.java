@@ -29,7 +29,6 @@ public class DBHelper {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             DBHelper.mySQLConnection = dataSource.getConnection();
-            //mysqlConnection = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PW);
             System.out.println("Connected to MYSQL DB");
         } catch(Exception ex) {
             System.out.println("Could not establish mysql connection. Maybe the MySQL server is offline.");

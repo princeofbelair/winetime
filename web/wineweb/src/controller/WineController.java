@@ -1,8 +1,6 @@
 package controller;
 
 import data.Wine;
-//import org.apache.jena.base.Sys;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -11,21 +9,15 @@ import org.primefaces.model.tagcloud.DefaultTagCloudModel;
 import org.primefaces.model.tagcloud.TagCloudItem;
 import org.primefaces.model.tagcloud.TagCloudModel;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+//import org.apache.jena.base.Sys;
 
 /**
  * ManagedBean for Index, Searchresults View
@@ -53,6 +45,7 @@ public class WineController implements Serializable {
     private String showSubClass = "";
     private String message = "";
     private String updateMessage = "";
+    private boolean hasResults = true;
 
     public String getShowSynonyms() { return this.showSynonyms; }
 
@@ -155,10 +148,6 @@ public class WineController implements Serializable {
         return generateModel("growers");
     }
 
-    public TagCloudModel getGrapes() {
-        return generateModel("wineGrapes");
-    }
-
     public TagCloudModel getWinecategory() {
         return generateModel("wineCategories");
     }
@@ -171,6 +160,7 @@ public class WineController implements Serializable {
      * @return DefaultTagCloudModel
      */
     private TagCloudModel generateModel(String attribute) {
+        this.semanticSearch(this.searchString);
         if(this.results != null) {
             List<String> growers = this.results.get(attribute);
             TagCloudModel model = new DefaultTagCloudModel();
@@ -242,21 +232,21 @@ public class WineController implements Serializable {
         resetFields();
         this.searchString = getLabelOfItem(event);
         addMessageToView();
-        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
+        this.submitSearch();
     }
 
     public void onSuperclassSelect(SelectEvent event) {
         resetFields();
         this.searchString = getLabelOfItem(event);
         addMessageToView();
-        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
+        this.submitSearch();
     }
 
     public void onSynonymSelect(SelectEvent event) {
         resetFields();
         this.searchString = getLabelOfItem(event);
         addMessageToView();
-        RequestContext.getCurrentInstance().execute("document.getElementById('search').submit();");
+        this.submitSearch();
     }
 
     public void onLocalitySelect(SelectEvent event) {
@@ -271,16 +261,14 @@ public class WineController implements Serializable {
         addMessageToView();
     }
 
-    public void onGrapeSelect(SelectEvent event) {
-        resetFields();
-        this.grape = getLabelOfItem(event);
-        addMessageToView();
-    }
-
     public void onWinecategorySelect(SelectEvent event) {
         resetFields();
         this.winecategory = getLabelOfItem(event);
         addMessageToView();
+        if(!this.hasResults)
+        { this.searchString = this.winecategory; this.submitSearch(); }
+        else { setResults(this.semanticSearch(this.searchString)); }
+
     }
 
     /**
@@ -304,7 +292,14 @@ public class WineController implements Serializable {
      * @return String
      */
     public String submitSearch() {
-        setResults(this.semanticSearch(this.searchString));
+
+        if(RequestContext.getCurrentInstance().isAjaxRequest()) {
+            setResults(semanticSearch(this.searchString));
+            RequestContext.getCurrentInstance().execute("location.href='searchresults.xhtml';");
+
+        } else {
+            setResults(semanticSearch(this.searchString));
+        }
         resetFields();
         proofIfEmpty();
         return "searchresults";
@@ -475,6 +470,9 @@ public class WineController implements Serializable {
         if(subClass.isEmpty() && superClass.isEmpty() && synonyms.isEmpty() && dbResults.isEmpty()){
             wineCategories = filter(wine.querySubClass("wein"));
             result.put("wineCategories", wineCategories);
+            this.hasResults = false;
+        } else {
+            this.hasResults = true;
         }
 
         return result;

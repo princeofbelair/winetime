@@ -17,7 +17,7 @@
     <div align="left">
         <h:form id="search" style="margin-left: 2%">
             <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 300px;" id="semanticSearchInput" validatorMessage="Suchebegriff darf nur alphanumerische Zeichen enthalten.">
-                <f:validateRegex pattern="^[a-zA-Z0-9 ]*$"></f:validateRegex>
+                <f:validateRegex pattern="^[a-zA-Z0-9ß ]*$"></f:validateRegex>
             </p:inputText>
             <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
         </h:form>
@@ -135,7 +135,7 @@
                 </div>
             </div>
             <div>&nbsp;</div>
-            <div class="ui-grid-row">
+            <div id="test" class="ui-grid-row">
                 <div class="ui-grid-col-12" style="margin-left: 2%; margin-right: 2%">
                     <p:fieldset legend="Suchen Sie auch nach...">
                         <div class="ui-grid-col-3">
