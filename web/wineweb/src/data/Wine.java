@@ -81,83 +81,6 @@ public class Wine {
     }
 
     /**
-     * returns all wines from db
-     *
-     * @return
-     */
-    public List<Wine> selectAll() {
-        String query = "select Id, Weinname, Weinsort, Weinkategorie, Winzer, Region, Ort from wines";
-
-        return executeQuery(query);
-    }
-
-    /**
-     * look up all wines from a given grower
-     *
-     * @param wineGrower
-     * @return
-     */
-    public List<Wine> searchWinesFromGrower(String wineGrower) {
-        String query = "select * from wines where Winzer like lower(\"%" + wineGrower + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
-     * look up all wines from a given region
-     *
-     * @param region
-     * @return
-     */
-    public List<Wine> searchWinesFromRegion(String region) {
-        String query = "select * from wines where Region like lower(\"%" + region + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
-     * look up all wines form a given locality
-     *
-     * @param locality
-     * @return
-     */
-    public List<Wine> searchWinesFromLocality(String locality) {
-        String query = "select * from wines where Ort like lower(\"%" + locality + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
-     * look up all wines by a given category
-     *
-     * @param category
-     * @return
-     */
-    public List<Wine> searchWinesByCategory(String category) {
-        String query = "select * from wines where Weinkategorie like lower(\"%" + category + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
-     *look up all wines by a given sort
-     *
-     * @param sort
-     * @return
-     */
-    public List<Wine> searchWinesBySort(String sort) {
-        String query = "select * from wines where Weinsort like lower(\"%" + sort + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
-     * look up all wines with a given name
-     *
-     * @param name
-     * @return
-     */
-    public List<Wine> searchWinesByName(String name) {
-        String query = "select * from wines where Weinname like lower(\"%" + name + "%\") ";
-        return executeQuery(query);
-    }
-
-    /**
      * looks up a given string as substring in whole table wines
      *
      * @param word
@@ -188,25 +111,6 @@ public class Wine {
         if (!wineGrape.isEmpty()) {
             query += " and Weinsorte like lower(\"%" + wineGrape + "%\")";
         }
-        return executeQuery(query);
-    }
-
-    /**
-     * looks up a given string in whole table wines
-     *
-     * @param word
-     * @return
-     */
-    public List<Wine> searchForString(String word) {
-        String query = "select Id, Weinname, Weinsorte, Weinkategorie, Winzer, Region, Ort " +
-                "from wines " +
-                "WHERE Weinname like lower(\"" + word + "\") or " +
-                "Weinsorte like lower(\"" + word + "\") or " +
-                "Weinkategorie like lower(\"" + word + "\") or " +
-                "Winzer like lower(\"" + word + "\") or " +
-                "Region like lower(\"" + word + "\") or " +
-                "Ort like lower(\"" + word + "\")";
-
         return executeQuery(query);
     }
 
