@@ -14,9 +14,8 @@
     <div>&nbsp;</div>
     <h2 style="text-align: center; color: #b30000;font-family: Verdana">SEMANTISCHE SUCHE NACH WEINEN</h2>
     <div>&nbsp;</div>
-
     <div align="left">
-        <h:form style="margin-left: 2%">
+        <h:form id="search" style="margin-left: 2%">
             <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 300px;" id="semanticSearchInput"/>
             <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
         </h:form>
@@ -119,14 +118,14 @@
                 <div class="ui-grid-col-3">
                     <p:fieldset legend="Ähnliche Begriffe" style="margin-right: 2%; min-height: 500px;">
                         <div align="center">
-                            <p:tagCloud model="#{data.synonyms}" style="display: #{data.showSynonyms}">
-                                <p:ajax event="select" update="myform" listener="#{data.onSynonymSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                            <p:tagCloud model="#{data.synonyms}" style="display: #{data.showSynonyms}" onclick="preventDefault(event)">
+                                <p:ajax event="select" update="search" listener="#{data.onSynonymSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
                             <p:tagCloud model="#{data.subClass}" style="display: #{data.showSubClass}">
-                                <p:ajax event="select" update="myform" listener="#{data.onSubclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                                <p:ajax event="select" update="search" listener="#{data.onSubclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
                             <p:tagCloud model="#{data.superClass}" style="display: #{data.showSuperClass}">
-                                <p:ajax event="select" update="myform" listener="#{data.onSuperclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                                <p:ajax event="select" update="search" listener="#{data.onSuperclassSelect}" style="font-size: 60% !important; width: auto !important;"/>
                             </p:tagCloud>
                             <p>#{data.message}</p>
                         </div>
@@ -141,7 +140,7 @@
                             <div align="center">
                                 <h3 style="color: #b30000">Regionen</h3>
                                 <p:tagCloud model="#{data.regions}">
-                                    <p:ajax event="select" update="myform" listener="#{data.onRegionSelect}" style="font-size: 60% !important; width: auto !important;"/>
+                                    <p:ajax event="select" update="myform search" listener="#{data.onRegionSelect}" style="font-size: 60% !important; width: auto !important;"/>
                                 </p:tagCloud>
                             </div>
                         </div>
@@ -149,7 +148,7 @@
                             <div align="center">
                                 <p:tagCloud model="#{data.locality}">
                                     <h3 style="color: #b30000">Orte</h3>
-                                    <p:ajax event="select" update="myform" listener="#{data.onLocalitySelect}" style="font-size: 60% !important;"/>
+                                    <p:ajax event="select" update="myform search" listener="#{data.onLocalitySelect}" style="font-size: 60% !important;"/>
                                 </p:tagCloud>
                             </div>
                         </div>
@@ -157,7 +156,7 @@
                             <div align="center">
                                 <p:tagCloud model="#{data.growers}">
                                     <h3 style="color: #b30000">Winzer</h3>
-                                    <p:ajax event="select" update="myform" listener="#{data.onGrowerSelect}" style="font-size: 60% !important;"/>
+                                    <p:ajax event="select" update="myform search" listener="#{data.onGrowerSelect}" style="font-size: 60% !important;"/>
                                 </p:tagCloud>
                             </div>
                         </div>
@@ -165,7 +164,7 @@
                             <div align="center">
                                 <p:tagCloud model="#{data.winecategory}">
                                     <h3 style="color: #b30000">Sorten</h3>
-                                    <p:ajax event="select" update="myform" listener="#{data.onWinecategorySelect}" style="font-size: 60% !important;border: none"/>
+                                    <p:ajax event="select" update="myform search" listener="#{data.onWinecategorySelect}" style="font-size: 60% !important;border: none"/>
                                 </p:tagCloud>
                             </div>
                         </div>
@@ -174,5 +173,10 @@
             </div>
         </div>
     </p:outputPanel>
+    <h:outputScript>
+        function preventDefault(e) {
+            e.preventDefault();
+        }
+    </h:outputScript>
 </h:body>
 </html>
