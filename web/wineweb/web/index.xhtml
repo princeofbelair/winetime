@@ -29,7 +29,7 @@
         <h:form>
             <p:growl showDetail="true" sticky="true"></p:growl>
             <p:inputText value="#{data.searchString}" placeholder="Schlüsselwort eingeben.." style="width: 500px;" id="semanticSearchInput" validatorMessage="Suchbegriff darf nur alphanumerische Zeichen enthalten.">
-                <f:validateRegex pattern="^[a-zA-Z0-9ß ]*$"></f:validateRegex>
+                <f:validateRegex pattern="^[a-zA-Z0-9ßäöü ]*$"></f:validateRegex>
             </p:inputText>
             <p:commandButton value="Suchen" action="#{data.submitSearch}" ajax="false" style="background-color: #b30000; border-color: #b30000; color: white; font-weight: lighter"/>
         </h:form>
