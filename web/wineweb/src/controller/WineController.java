@@ -468,6 +468,11 @@ public class WineController implements Serializable {
         if(wineCategories.size() == 1)wineCategories.remove(0);
         result.put("wineCategories", wineCategories);
 
+        if(subClass.isEmpty() && superClass.isEmpty() && synonyms.isEmpty() && dbResults.isEmpty()){
+            wineCategories = wine.querySubClass("Wein");
+            result.put("wineCategories", wineCategories);
+        }
+
         return result;
     }
 
